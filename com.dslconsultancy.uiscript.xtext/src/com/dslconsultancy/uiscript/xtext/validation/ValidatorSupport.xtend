@@ -5,8 +5,12 @@ import com.dslconsultancy.uiscript.core.Named
 import com.dslconsultancy.uiscript.core.Parameter
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
+import org.eclipse.xtext.validation.EValidatorRegistrar
 
 abstract class ValidatorSupport extends AbstractDeclarativeValidator {
+
+	override register(EValidatorRegistrar registrar) {}
+
 
 	def protected isUncapitalized(Named it) {
 		Character.isLowerCase(name.charAt(0))

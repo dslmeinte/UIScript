@@ -78,10 +78,6 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 	 * +------------+
 	 */
 
-	def IScope scope_ShowModalStatement_viewable(UiModule it, EReference eRef) {
-		scopeFor(viewables.filter[component])
-	}
-
 	def IScope scope_Argument_parameter(GotoModuleStatement it, EReference eRef) {
 	    scopeFor(targetModule.firstScreen.parameters)
 	}
