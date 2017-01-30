@@ -5,7 +5,6 @@ import com.dslconsultancy.uiscript.types.BuiltinTypeLiteral
 import com.dslconsultancy.uiscript.types.BuiltinTypes
 import com.dslconsultancy.uiscript.types.CallbackErrorResponseLiteral
 import com.dslconsultancy.uiscript.types.CallbackLiteral
-import com.dslconsultancy.uiscript.types.DefinedType
 import com.dslconsultancy.uiscript.types.DefinedTypeLiteral
 import com.dslconsultancy.uiscript.types.Enumeration
 import com.dslconsultancy.uiscript.types.Feature
@@ -20,6 +19,7 @@ import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
 
 import static com.dslconsultancy.uiscript.types.BuiltinTypes.*
+import com.dslconsultancy.uiscript.types.TypeDefinition
 
 /**
  * @author Meinte Boersma
@@ -112,9 +112,9 @@ class TypeExtensionsImpl implements TypeExtensions {
 
 	override simpleTypedFeatures(Structure it)		{ features.filter[type.simpleTyped] }
 	override linkedTypedFeatures(Structure it)		{ features.filter[type.linkedTyped] }
-	override listTypedFeatures(DefinedType it)		{ featuresOf.filter[type.listTyped] }
+	override listTypedFeatures(TypeDefinition it)		{ featuresOf.filter[type.listTyped] }
 		// TODO  tweak this so this function returns Iterable<Feature<ListTypeLiteral>>
-	override structureTypedFeatures(DefinedType it)	{ featuresOf.filter[type.structureTyped] }
+	override structureTypedFeatures(TypeDefinition it)	{ featuresOf.filter[type.structureTyped] }
 		// TODO  tweak this so this function returns Iterable<Feature<DefinedTypeLiteral>>
 	override builtinTypedFeatures(Structure it)		{ features.filter[type.builtinTyped] }
 		// TODO  tweak this so this function returns Iterable<Feature<BuiltinTypeLiteral>>
@@ -187,7 +187,7 @@ class TypeExtensionsImpl implements TypeExtensions {
 		return typeLiteral
 	}
 
-	override createDefinedTypeLiteral(DefinedType it) {
+	override createDefinedTypeLiteral(TypeDefinition it) {
  		val typeLiteral = eFactory.createDefinedTypeLiteral
 		typeLiteral.type = it
 		return typeLiteral

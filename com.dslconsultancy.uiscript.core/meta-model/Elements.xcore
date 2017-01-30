@@ -42,25 +42,6 @@ class ButtonElement extends Element {
 class ComponentInvocation extends Element, ViewableCallSite {}
 
 
-class GroupElement extends Element {
-	GroupOrientations orientation
-	VerticalAlignment verticalAlignment
-	contains GroupElement[] nestedGroups
-	contains ElementBody[] leafGroups
-}
-
-enum GroupOrientations {
-	vertical
-	horizontal = 1
-}
-
-enum VerticalAlignment {
-	top
-	bottom = 1
-	middle = 2
-}
-
-
 class ImageElement extends Element {
 	boolean observed
 	contains Expression sourceUrl
@@ -109,12 +90,6 @@ class WhenElement extends Element {
 	contains Expression condition
 	contains ElementBody body
 }
-
-
-class Quotation extends Element {
-	contains Expression path
-}
-
 
 
 class ElementBody {

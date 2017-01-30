@@ -2,7 +2,6 @@
 @GenModel(forceOverwrite="true", modelName="UICore", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.core
 
-import com.dslconsultancy.uiscript.types.DefinedType
 import com.dslconsultancy.uiscript.types.TypeLiteral
 
 
@@ -27,12 +26,6 @@ abstract class Named {
 abstract class Expression {}
 
 
-class UiModule {
-	contains Parametrisable[] parametrisables
-	contains DefinedType typeDefinitions
-}
-
-
 
 /*
  * +------------+
@@ -43,6 +36,7 @@ class UiModule {
 abstract class Referable extends Named {}
 
 class IteratorVariable extends Referable {}
+
 
 
 /*
@@ -87,6 +81,7 @@ class ViewableCallSite {
 class Element extends ViewableDefinition {}
 
 
+
 /*
  * +--------+
  * | values |
@@ -111,6 +106,7 @@ enum ValueSpecificationTypes {
 }
 
 
+
 /*
  * +---------+
  * | methods |
@@ -123,6 +119,7 @@ class MethodDefinition extends Parametrisable, ViewableDefinition {
 	contains Method method
 	contains StatementBlock statementBlock
 }
+
 
 
 /*
@@ -151,6 +148,7 @@ class Argument {
 class ArgumentList {
 	contains Argument[] arguments
 }
+
 
 
 /*

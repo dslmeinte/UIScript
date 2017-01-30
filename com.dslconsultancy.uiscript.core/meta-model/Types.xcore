@@ -5,10 +5,10 @@ package com.dslconsultancy.uiscript.types
 import com.dslconsultancy.uiscript.core.Named
 
 
-abstract class DefinedType extends Named {}
+abstract class TypeDefinition extends Named {}
 
 
-class Structure extends DefinedType {
+class Structure extends TypeDefinition {
 	boolean persistent
 	contains Feature<TypeLiteral>[] features
 }
@@ -18,7 +18,7 @@ class Feature<T extends TypeLiteral> extends Named {
 	contains T ^type
 }
 
-class Enumeration extends DefinedType {
+class Enumeration extends TypeDefinition {
 	contains EnumerationLiteral[] literals
 }
 
@@ -48,7 +48,7 @@ enum BuiltinTypes {
 }
 
 class DefinedTypeLiteral extends TypeLiteral {
-	refers DefinedType ^type
+	refers TypeDefinition ^type
 }
 
 class ListTypeLiteral extends TypeLiteral {

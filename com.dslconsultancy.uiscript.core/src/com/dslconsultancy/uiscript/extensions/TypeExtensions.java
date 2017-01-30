@@ -7,7 +7,7 @@ import com.dslconsultancy.uiscript.types.BuiltinTypeLiteral;
 import com.dslconsultancy.uiscript.types.BuiltinTypes;
 import com.dslconsultancy.uiscript.types.CallbackErrorResponseLiteral;
 import com.dslconsultancy.uiscript.types.CallbackLiteral;
-import com.dslconsultancy.uiscript.types.DefinedType;
+import com.dslconsultancy.uiscript.types.TypeDefinition;
 import com.dslconsultancy.uiscript.types.DefinedTypeLiteral;
 import com.dslconsultancy.uiscript.types.Enumeration;
 import com.dslconsultancy.uiscript.types.Feature;
@@ -71,15 +71,15 @@ public interface TypeExtensions {
 
 	Iterable<Feature<TypeLiteral>> linkedTypedFeatures(Structure it);
 
-	Iterable<Feature<TypeLiteral>> listTypedFeatures(DefinedType it);
+	Iterable<Feature<TypeLiteral>> listTypedFeatures(TypeDefinition it);
 
-	Iterable<Feature<TypeLiteral>> structureTypedFeatures(DefinedType it);
+	Iterable<Feature<TypeLiteral>> structureTypedFeatures(TypeDefinition it);
 
 	Iterable<Feature<TypeLiteral>> builtinTypedFeatures(Structure it);
 
 	BuiltinTypeLiteral createBuiltinTypeLiteral(BuiltinTypes builtinType);
 
-	DefinedTypeLiteral createDefinedTypeLiteral(DefinedType it);
+	DefinedTypeLiteral createDefinedTypeLiteral(TypeDefinition it);
 
 	ListTypeLiteral createListTypeLiteral(TypeLiteral itemType);
 
@@ -89,7 +89,7 @@ public interface TypeExtensions {
 
 	VoidLiteral createVoidLiteral();
 
-	List<Feature<TypeLiteral>> featuresOf(DefinedType it);
+	List<Feature<TypeLiteral>> featuresOf(TypeDefinition it);
 
 	boolean isAssignableFrom(TypeLiteral target, TypeLiteral source);
 

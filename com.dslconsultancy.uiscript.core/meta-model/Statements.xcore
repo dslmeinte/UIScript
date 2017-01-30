@@ -8,9 +8,9 @@ import com.dslconsultancy.uiscript.core.Expression
 import com.dslconsultancy.uiscript.core.IteratorVariable
 import com.dslconsultancy.uiscript.core.Statement
 import com.dslconsultancy.uiscript.core.StatementBlock
-import com.dslconsultancy.uiscript.core.UiModule
 import com.dslconsultancy.uiscript.core.ViewableCallSite
 import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
+import com.dslconsultancy.uiscript.structural.UiModule
 import com.dslconsultancy.uiscript.types.Feature
 
 
@@ -45,17 +45,6 @@ class ForStatement extends NonExitingStatement {
 }
 
 
-class ListRemoveStatement extends NonExitingStatement {
-	contains Expression listExpr
-	refers Feature<?> feature
-	contains Expression valueExpr
-	contains Expression indexVariable
-}
-
-
-class GotoScreenStatement extends ExitingStatement, ViewableCallSite {}
-
-
 class GotoModuleStatement extends ExitingStatement {
 	refers UiModule targetModule
 	contains ArgumentList args
@@ -64,10 +53,21 @@ class GotoModuleStatement extends ExitingStatement {
 }
 
 
+class GotoScreenStatement extends ExitingStatement, ViewableCallSite {}
+
+
 class IfStatement extends NonExitingStatement {
 	contains Expression condition
 	contains StatementBlock thenBlock
 	contains StatementBlock elseBlock
+}
+
+
+class ListRemoveStatement extends NonExitingStatement {
+	contains Expression listExpr
+	refers Feature<?> feature
+	contains Expression valueExpr
+	contains Expression indexVariable
 }
 
 

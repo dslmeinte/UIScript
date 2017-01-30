@@ -10,7 +10,6 @@ class Service extends Named {
 	HttpMethods method
 	contains TypeLiteral inputType
 	contains TypeLiteral outputType
-	boolean authenticated
 	String urlPattern
 	String documentation
 }

@@ -1,6 +1,7 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
 import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.IteratorVariable
 import com.dslconsultancy.uiscript.core.Method
 import com.dslconsultancy.uiscript.core.Parameter
 import com.dslconsultancy.uiscript.core.Referable
@@ -45,7 +46,6 @@ import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
 
 import static com.dslconsultancy.uiscript.types.BuiltinTypes.*
-import com.dslconsultancy.uiscript.core.IteratorVariable
 
 /**
  * This class computes types of {@link Expression expressions} and other

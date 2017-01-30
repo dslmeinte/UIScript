@@ -4,11 +4,11 @@ import com.dslconsultancy.uiscript.core.Argument
 import com.dslconsultancy.uiscript.core.Expression
 import com.dslconsultancy.uiscript.core.Method
 import com.dslconsultancy.uiscript.core.MethodDefinition
-import com.dslconsultancy.uiscript.core.UiModule
 import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
 import com.dslconsultancy.uiscript.extensions.MethodExtensions
 import com.dslconsultancy.uiscript.extensions.StatementExtensions
+import com.dslconsultancy.uiscript.structural.UiModule
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
 import com.google.inject.Singleton

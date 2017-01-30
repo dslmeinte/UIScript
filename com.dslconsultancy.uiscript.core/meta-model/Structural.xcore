@@ -1,0 +1,15 @@
+@Ecore(nsURI="http://www.dslconsultancy.com/uicript/structural")
+@GenModel(forceOverwrite="true", modelName="UIStructural", updateClasspath="false", complianceLevel="5.0")
+package com.dslconsultancy.uiscript.structural
+
+import com.dslconsultancy.uiscript.core.Parametrisable
+import com.dslconsultancy.uiscript.services.Service
+import com.dslconsultancy.uiscript.types.TypeDefinition
+
+
+class UiModule {
+	contains Parametrisable[] parametrisables
+	contains TypeDefinition[] typeDefinitions
+	contains Service[] services
+}
+

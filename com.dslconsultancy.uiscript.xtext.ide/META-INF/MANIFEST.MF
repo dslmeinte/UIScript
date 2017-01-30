@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.dslconsultancy.uiscript.xtext.ide
+Bundle-Vendor: DSLConsultancy.com
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: com.dslconsultancy.uiscript.xtext.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.dslconsultancy.uiscript.xtext,
+ com.dslconsultancy.uiscript.core,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
