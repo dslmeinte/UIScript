@@ -4,12 +4,12 @@ import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
 import com.dslconsultancy.uiscript.extensions.StatementExtensions
 import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
+import com.dslconsultancy.uiscript.statements.AssignmentOrExpressionStatement
+import com.dslconsultancy.uiscript.statements.LocalValueDeclarationStatement
+import com.dslconsultancy.uiscript.statements.Statement
+import com.dslconsultancy.uiscript.statements.StatementBlock
+import com.dslconsultancy.uiscript.statements.UnsetStatement
 import com.dslconsultancy.uiscript.types.VoidLiteral
-import com.dslconsultancy.uiscript.uidsl.AssignmentOrExpressionStatement
-import com.dslconsultancy.uiscript.uidsl.LocalValueDeclarationStatement
-import com.dslconsultancy.uiscript.uidsl.Statement
-import com.dslconsultancy.uiscript.uidsl.StatementBlock
-import com.dslconsultancy.uiscript.uidsl.UnsetStatement
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
 import com.google.inject.Singleton

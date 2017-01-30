@@ -3,10 +3,10 @@ package com.dslconsultancy.uiscript.extensions.impl
 import com.dslconsultancy.uiscript.extensions.ReferableExtensions
 import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
+import com.dslconsultancy.uiscript.statements.LocalValueDeclarationStatement
 import com.dslconsultancy.uiscript.uidsl.AbstractValueDeclaration
 import com.dslconsultancy.uiscript.uidsl.ListElement
 import com.dslconsultancy.uiscript.uidsl.ListVariable
-import com.dslconsultancy.uiscript.uidsl.LocalValueDeclarationStatement
 import com.dslconsultancy.uiscript.uidsl.Value
 import com.dslconsultancy.uiscript.uidsl.ValueDeclaration
 import com.dslconsultancy.uiscript.uidsl.ValueSpecificationTypes

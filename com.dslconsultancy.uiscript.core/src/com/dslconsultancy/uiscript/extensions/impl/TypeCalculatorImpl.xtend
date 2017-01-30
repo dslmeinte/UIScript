@@ -6,8 +6,6 @@ import com.dslconsultancy.uiscript.expressions.ArithmeticBinaryOperatorExpressio
 import com.dslconsultancy.uiscript.expressions.BooleanBinaryOperatorExpression
 import com.dslconsultancy.uiscript.expressions.BooleanLiteralExpression
 import com.dslconsultancy.uiscript.expressions.BuiltinFunctionExpression
-import com.dslconsultancy.uiscript.expressions.CallbackErrorResponseExpression
-import com.dslconsultancy.uiscript.expressions.CallbackResponseExpression
 import com.dslconsultancy.uiscript.expressions.ComparisonExpression
 import com.dslconsultancy.uiscript.expressions.DateExpression
 import com.dslconsultancy.uiscript.expressions.DecisionExpression
@@ -15,7 +13,6 @@ import com.dslconsultancy.uiscript.expressions.EnumerationLiteralExpression
 import com.dslconsultancy.uiscript.expressions.Expression
 import com.dslconsultancy.uiscript.expressions.FeatureAccessExpression
 import com.dslconsultancy.uiscript.expressions.IntegerLiteralExpression
-import com.dslconsultancy.uiscript.expressions.InterfaceCallExpression
 import com.dslconsultancy.uiscript.expressions.ListLiteralExpression
 import com.dslconsultancy.uiscript.expressions.MultiplicativeExpression
 import com.dslconsultancy.uiscript.expressions.MultiplicativeOperators
@@ -27,6 +24,11 @@ import com.dslconsultancy.uiscript.expressions.SelectionExpression
 import com.dslconsultancy.uiscript.expressions.StringLiteralExpression
 import com.dslconsultancy.uiscript.expressions.StructureCreationExpression
 import com.dslconsultancy.uiscript.expressions.TernaryExpression
+import com.dslconsultancy.uiscript.expressions.aux.CallbackErrorResponseExpression
+import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
+import com.dslconsultancy.uiscript.expressions.aux.CallbackResponseExpression
+import com.dslconsultancy.uiscript.expressions.aux.InterfaceCallExpression
+import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
 import com.dslconsultancy.uiscript.extensions.MethodExtensions
 import com.dslconsultancy.uiscript.extensions.StatementExtensions
@@ -34,10 +36,8 @@ import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.types.TypeLiteral
 import com.dslconsultancy.uiscript.types.VoidLiteral
-import com.dslconsultancy.uiscript.uidsl.CallbackExpression
 import com.dslconsultancy.uiscript.uidsl.ListVariable
 import com.dslconsultancy.uiscript.uidsl.Method
-import com.dslconsultancy.uiscript.uidsl.MethodCallExpression
 import com.dslconsultancy.uiscript.uidsl.Parameter
 import com.dslconsultancy.uiscript.uidsl.Value
 import com.dslconsultancy.uiscript.util.XtextUtil

@@ -1,0 +1,40 @@
+@Ecore(nsURI="http://www.dslconsultancy.com/uicript/expressionsAux")
+@GenModel(forceOverwrite="true", modelName="UIExpressionsAux", updateClasspath="false", complianceLevel="5.0")
+package com.dslconsultancy.uiscript.expressions.aux
+
+import com.dslconsultancy.uiscript.expressions.Expression
+import com.dslconsultancy.uiscript.expressions.ReferenceExpression
+import com.dslconsultancy.uiscript.expressions.ValueReferenceOrMethodCallExpression
+import com.dslconsultancy.uiscript.services.Service
+import com.dslconsultancy.uiscript.statements.StatementBlock
+import com.dslconsultancy.uiscript.uidsl.ArgumentList
+
+
+/**
+ * Some "auxiliary" expression sub types that reference types from other parts of the DSL,
+ * so cannot be defined along the rest of the expression sub types.
+ */
+
+abstract class CallbackExpressions extends Expression {}
+
+class CallbackExpression extends CallbackExpressions {
+	contains StatementBlock statementBlock
+}
+
+class InterfaceCallExpression extends Expression {
+	refers Service service
+	contains Expression[] observeSites
+	contains Expression input
+	contains CallbackExpression callback
+	contains CallbackExpression errorCallback
+}
+
+class CallbackResponseExpression extends CallbackExpressions {}
+
+class CallbackErrorResponseExpression extends CallbackExpressions {}
+
+class MethodCallExpression extends ValueReferenceOrMethodCallExpression {
+	contains ReferenceExpression methodRef
+	contains ArgumentList argumentList
+}
+

@@ -2,12 +2,10 @@
 @GenModel(forceOverwrite="true", modelName="UIExpressions", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.expressions
 
-import com.dslconsultancy.uiscript.services.Service
 import com.dslconsultancy.uiscript.types.Enumeration
 import com.dslconsultancy.uiscript.types.EnumerationLiteral
 import com.dslconsultancy.uiscript.types.Feature
 import com.dslconsultancy.uiscript.types.Structure
-import com.dslconsultancy.uiscript.uidsl.CallbackExpression
 
 
 abstract class Expression {}
@@ -78,10 +76,6 @@ class DecisionCase {
 	contains Expression valueExpr
 }
 
-abstract class CallbackExpressions extends Expression {}
-
-// CallbackExpression needed to be defined in UIDsl
-
 class StructureCreationExpression extends Expression {
 	refers Structure structure
 	contains FeatureAssignment[] assignments
@@ -128,14 +122,6 @@ class NotExpression extends Expression {
 	contains Expression operand
 }
 
-class InterfaceCallExpression extends Expression {
-	refers Service service
-	contains Expression[] observeSites
-	contains Expression input
-	contains CallbackExpression callback
-	contains CallbackExpression errorCallback
-}
-
 class FeatureAccessExpression extends Expression {
 	contains Expression previous
 	refers Feature<?> feature
@@ -162,10 +148,6 @@ class IntegerLiteralExpression extends LiteralExpression {
 class NumberLiteralExpression extends LiteralExpression {
 	BigDecimal value
 }
-
-class CallbackResponseExpression extends CallbackExpressions {}
-
-class CallbackErrorResponseExpression extends CallbackExpressions {}
 
 // MethodCallExpression needed to be defined in UIDsl
 

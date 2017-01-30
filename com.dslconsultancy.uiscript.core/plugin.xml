@@ -38,4 +38,20 @@
             genModel="meta-model/Expressions.xcore"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Statements -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/statements"
+            class="com.dslconsultancy.uiscript.statements.StatementsPackage"
+            genModel="meta-model/Statements.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ExpressionsAux -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/expressionsAux"
+            class="com.dslconsultancy.uiscript.expressions.aux.AuxPackage"
+            genModel="meta-model/ExpressionsAux.xcore"/>
+   </extension>
+
 </plugin>

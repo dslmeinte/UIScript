@@ -1,12 +1,12 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
 import com.dslconsultancy.uiscript.expressions.Expression
+import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
 import com.dslconsultancy.uiscript.extensions.MethodExtensions
 import com.dslconsultancy.uiscript.extensions.StatementExtensions
 import com.dslconsultancy.uiscript.uidsl.Argument
 import com.dslconsultancy.uiscript.uidsl.Method
-import com.dslconsultancy.uiscript.uidsl.MethodCallExpression
 import com.dslconsultancy.uiscript.uidsl.MethodDefinition
 import com.dslconsultancy.uiscript.uidsl.UiModule
 import com.dslconsultancy.uiscript.util.XtextUtil

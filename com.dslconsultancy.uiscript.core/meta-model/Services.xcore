@@ -22,10 +22,3 @@ enum HttpMethods {
 	delete as "DELETE" = 3
 }
 
-
-// for use in references downstream:
-
-class ServiceIdentification {
-	refers Service service
-}
-

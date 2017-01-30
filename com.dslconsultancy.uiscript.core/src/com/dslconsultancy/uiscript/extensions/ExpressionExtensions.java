@@ -6,10 +6,10 @@ import java.util.Set;
 import com.dslconsultancy.uiscript.expressions.Expression;
 import com.dslconsultancy.uiscript.expressions.FeatureAccessExpression;
 import com.dslconsultancy.uiscript.expressions.ListLiteralExpression;
+import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression;
 import com.dslconsultancy.uiscript.extensions.impl.ExpressionExtensionsImpl;
 import com.dslconsultancy.uiscript.types.TypeLiteral;
 import com.dslconsultancy.uiscript.uidsl.Method;
-import com.dslconsultancy.uiscript.uidsl.MethodCallExpression;
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(ExpressionExtensionsImpl.class)

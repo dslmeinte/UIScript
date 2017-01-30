@@ -1,0 +1,82 @@
+@Ecore(nsURI="http://www.dslconsultancy.com/uicript/statements")
+@GenModel(forceOverwrite="true", modelName="UIStatements", updateClasspath="false", complianceLevel="5.0")
+package com.dslconsultancy.uiscript.statements
+
+import com.dslconsultancy.uiscript.expressions.Expression
+import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
+import com.dslconsultancy.uiscript.types.Feature
+import com.dslconsultancy.uiscript.uidsl.AbstractValueDeclaration
+import com.dslconsultancy.uiscript.uidsl.ArgumentList
+import com.dslconsultancy.uiscript.uidsl.ListVariable
+import com.dslconsultancy.uiscript.uidsl.UiModule
+import com.dslconsultancy.uiscript.uidsl.Viewable
+
+class StatementBlock {
+	contains Statement[] statements
+}
+
+abstract class Statement {}
+
+abstract class ExitingStatement extends Statement {}
+
+abstract class NonExitingStatement extends Statement {}
+
+class ForStatement extends NonExitingStatement {
+	contains ListVariable indexVariable
+	contains ListVariable valueVariable
+	contains Expression listExpression
+	contains StatementBlock thenBlock
+}
+
+class ListRemoveStatement extends NonExitingStatement {
+	contains Expression listExpr
+	refers Feature<?> feature
+	contains Expression valueExpr
+	contains Expression indexVariable
+}
+
+class AssignmentOrExpressionStatement extends NonExitingStatement {
+	contains Expression lhs
+	AssignmentOperator operator
+	contains Expression rhs
+}
+
+enum AssignmentOperator {
+	assign as "="
+	add as "+=" = 1
+	sub as "-=" = 2
+}
+
+class ShowModalStatement extends NonExitingStatement, ViewableCallSite {
+	boolean persistent
+}
+
+class ExitModalStatement extends NonExitingStatement {}
+
+class GotoScreenStatement extends ExitingStatement, ViewableCallSite {}
+
+class GotoModuleStatement extends ExitingStatement {
+	refers UiModule targetModule
+	contains ArgumentList args
+	boolean authenticate
+	contains CallbackExpression errorCallback
+}
+
+
+class IfStatement extends NonExitingStatement {
+	contains Expression condition
+	contains StatementBlock thenBlock
+	contains StatementBlock elseBlock
+}
+
+class LocalValueDeclarationStatement extends AbstractValueDeclaration, NonExitingStatement {}
+
+class UnsetStatement extends NonExitingStatement {
+	contains Expression lhs
+}
+
+class ViewableCallSite {
+	refers Viewable viewable
+	contains ArgumentList argumentList
+}
+

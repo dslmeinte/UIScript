@@ -2,12 +2,10 @@
 @GenModel(forceOverwrite="true", modelName="UIDsl", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.uidsl
 
-import com.dslconsultancy.uiscript.expressions.CallbackExpressions
 import com.dslconsultancy.uiscript.expressions.Expression
 import com.dslconsultancy.uiscript.expressions.Referable
-import com.dslconsultancy.uiscript.expressions.ReferenceExpression
-import com.dslconsultancy.uiscript.expressions.ValueReferenceOrMethodCallExpression
-import com.dslconsultancy.uiscript.types.Feature
+import com.dslconsultancy.uiscript.statements.StatementBlock
+import com.dslconsultancy.uiscript.statements.ViewableCallSite
 import com.dslconsultancy.uiscript.types.TypeLiteral
 
 
@@ -184,98 +182,5 @@ class ImageElement extends Element {
 	contains Expression sourceUrl
 	contains Expression width
 	contains Expression height
-}
-
-
-
-/*
- * +------------+
- * | statements |
- * +------------+
- */
-
-class StatementBlock {
-	contains Statement[] statements
-}
-
-abstract class Statement {}
-
-abstract class ExitingStatement extends Statement {}
-
-abstract class NonExitingStatement extends Statement {}
-
-class ForStatement extends NonExitingStatement {
-	contains ListVariable indexVariable
-	contains ListVariable valueVariable
-	contains Expression listExpression
-	contains StatementBlock thenBlock
-}
-
-class ListRemoveStatement extends NonExitingStatement {
-	contains Expression listExpr
-	refers Feature<?> feature
-	contains Expression valueExpr
-	contains Expression indexVariable
-}
-
-class AssignmentOrExpressionStatement extends NonExitingStatement {
-	contains Expression lhs
-	AssignmentOperator operator
-	contains Expression rhs
-}
-
-enum AssignmentOperator {
-	assign as "="
-	add as "+=" = 1
-	sub as "-=" = 2
-}
-
-class ShowModalStatement extends NonExitingStatement, ViewableCallSite {
-	boolean persistent
-}
-
-class ExitModalStatement extends NonExitingStatement {}
-
-class GotoScreenStatement extends ExitingStatement, ViewableCallSite {}
-
-class GotoModuleStatement extends ExitingStatement {
-	refers UiModule targetModule
-	contains ArgumentList args
-	boolean authenticate
-	contains CallbackExpression errorCallback
-}
-
-
-class IfStatement extends NonExitingStatement {
-	contains Expression condition
-	contains StatementBlock thenBlock
-	contains StatementBlock elseBlock
-}
-
-class LocalValueDeclarationStatement extends AbstractValueDeclaration, NonExitingStatement {}
-
-class UnsetStatement extends NonExitingStatement {
-	contains Expression lhs
-}
-
-class ViewableCallSite {
-	refers Viewable viewable
-	contains ArgumentList argumentList
-}
-
-
-/*
- * +-------------+
- * | expressions |
- * +-------------+
- */
-
-class CallbackExpression extends CallbackExpressions {
-	contains StatementBlock statementBlock
-}
-
-class MethodCallExpression extends ValueReferenceOrMethodCallExpression {
-	contains ReferenceExpression methodRef
-	contains ArgumentList argumentList
 }
 
