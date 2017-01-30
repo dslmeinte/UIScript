@@ -1,0 +1,31 @@
+@Ecore(nsURI="http://www.dslconsultancy.com/uicript/services")
+@GenModel(forceOverwrite="true", modelName="UIServices", updateClasspath="false", complianceLevel="5.0")
+package com.dslconsultancy.uiscript.services
+
+import com.dslconsultancy.uiscript.types.TypeLiteral
+
+
+class Service {
+	String name
+	HttpMethods method
+	contains TypeLiteral inputType
+	contains TypeLiteral outputType
+	boolean authenticated
+	String urlPattern
+	String documentation
+}
+
+enum HttpMethods {
+	^get as "GET"
+	put as "PUT" = 1
+	post as "POST" = 2
+	delete as "DELETE" = 3
+}
+
+
+// for use in references downstream:
+
+class ServiceIdentification {
+	refers Service service
+}
+

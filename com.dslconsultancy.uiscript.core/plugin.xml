@@ -14,4 +14,12 @@
             genModel="meta-model/Types.xcore"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Services -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/services"
+            class="com.dslconsultancy.uiscript.services.ServicesPackage"
+            genModel="meta-model/Services.xcore"/>
+   </extension>
+
 </plugin>
