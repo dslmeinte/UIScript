@@ -2,11 +2,11 @@
 @GenModel(forceOverwrite="true", modelName="UIServices", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.services
 
+import com.dslconsultancy.uiscript.core.Named
 import com.dslconsultancy.uiscript.types.TypeLiteral
 
 
-class Service {
-	String name
+class Service extends Named {
 	HttpMethods method
 	contains TypeLiteral inputType
 	contains TypeLiteral outputType

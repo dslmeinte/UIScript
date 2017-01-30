@@ -2,13 +2,13 @@ package com.dslconsultancy.uiscript.extensions;
 
 import java.util.Set;
 
-import com.dslconsultancy.uiscript.expressions.Expression;
+import com.dslconsultancy.uiscript.core.Argument;
+import com.dslconsultancy.uiscript.core.Expression;
+import com.dslconsultancy.uiscript.core.Method;
+import com.dslconsultancy.uiscript.core.MethodDefinition;
+import com.dslconsultancy.uiscript.core.Viewable;
 import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression;
 import com.dslconsultancy.uiscript.extensions.impl.MethodExtensionsImpl;
-import com.dslconsultancy.uiscript.uidsl.Argument;
-import com.dslconsultancy.uiscript.uidsl.Method;
-import com.dslconsultancy.uiscript.uidsl.MethodDefinition;
-import com.dslconsultancy.uiscript.uidsl.Viewable;
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(MethodExtensionsImpl.class)

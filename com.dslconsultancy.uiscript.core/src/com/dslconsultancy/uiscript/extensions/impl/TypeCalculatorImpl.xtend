@@ -1,5 +1,10 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
+import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.Method
+import com.dslconsultancy.uiscript.core.Parameter
+import com.dslconsultancy.uiscript.core.Referable
+import com.dslconsultancy.uiscript.core.Value
 import com.dslconsultancy.uiscript.expressions.AdditiveExpression
 import com.dslconsultancy.uiscript.expressions.AdditiveOperators
 import com.dslconsultancy.uiscript.expressions.ArithmeticBinaryOperatorExpression
@@ -10,7 +15,6 @@ import com.dslconsultancy.uiscript.expressions.ComparisonExpression
 import com.dslconsultancy.uiscript.expressions.DateExpression
 import com.dslconsultancy.uiscript.expressions.DecisionExpression
 import com.dslconsultancy.uiscript.expressions.EnumerationLiteralExpression
-import com.dslconsultancy.uiscript.expressions.Expression
 import com.dslconsultancy.uiscript.expressions.FeatureAccessExpression
 import com.dslconsultancy.uiscript.expressions.IntegerLiteralExpression
 import com.dslconsultancy.uiscript.expressions.ListLiteralExpression
@@ -18,7 +22,6 @@ import com.dslconsultancy.uiscript.expressions.MultiplicativeExpression
 import com.dslconsultancy.uiscript.expressions.MultiplicativeOperators
 import com.dslconsultancy.uiscript.expressions.NotExpression
 import com.dslconsultancy.uiscript.expressions.NumberLiteralExpression
-import com.dslconsultancy.uiscript.expressions.Referable
 import com.dslconsultancy.uiscript.expressions.ReferenceExpression
 import com.dslconsultancy.uiscript.expressions.SelectionExpression
 import com.dslconsultancy.uiscript.expressions.StringLiteralExpression
@@ -36,16 +39,13 @@ import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.types.TypeLiteral
 import com.dslconsultancy.uiscript.types.VoidLiteral
-import com.dslconsultancy.uiscript.uidsl.ListVariable
-import com.dslconsultancy.uiscript.uidsl.Method
-import com.dslconsultancy.uiscript.uidsl.Parameter
-import com.dslconsultancy.uiscript.uidsl.Value
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
 
 import static com.dslconsultancy.uiscript.types.BuiltinTypes.*
+import com.dslconsultancy.uiscript.core.IteratorVariable
 
 /**
  * This class computes types of {@link Expression expressions} and other
@@ -214,7 +214,7 @@ class TypeCalculatorImpl implements TypeCalculator {
 		switch it {
 			Value:			if( declaration.declaredType == null ) { declaration.valueExpr?.type_ } else { declaration.declaredType }	// (returns null in case of parse/validation error)
 			Parameter:		it.type
-			ListVariable:	<TypeLiteral>ifIndexVarThenElse( [INTEGER.createBuiltinTypeLiteral], [valueVariableType] )
+			IteratorVariable:	<TypeLiteral>ifIndexVarThenElse( [INTEGER.createBuiltinTypeLiteral], [valueVariableType] )
 			Method:			it.returnType
 			default:		{
 								logProblem('''encountered «IF eIsProxy»unresolved proxy of «ENDIF»«eClass.name» in dispatch to TypeCalculator#refType'''.toString)

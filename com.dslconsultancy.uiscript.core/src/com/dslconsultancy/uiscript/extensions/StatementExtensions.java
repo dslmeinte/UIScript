@@ -2,14 +2,14 @@ package com.dslconsultancy.uiscript.extensions;
 
 import java.util.Set;
 
-import com.dslconsultancy.uiscript.expressions.Expression;
+import com.dslconsultancy.uiscript.core.Expression;
+import com.dslconsultancy.uiscript.core.Method;
+import com.dslconsultancy.uiscript.core.Statement;
+import com.dslconsultancy.uiscript.core.StatementBlock;
+import com.dslconsultancy.uiscript.core.Value;
 import com.dslconsultancy.uiscript.extensions.impl.StatementExtensionsImpl;
 import com.dslconsultancy.uiscript.statements.AssignmentOrExpressionStatement;
-import com.dslconsultancy.uiscript.statements.Statement;
-import com.dslconsultancy.uiscript.statements.StatementBlock;
 import com.dslconsultancy.uiscript.types.TypeLiteral;
-import com.dslconsultancy.uiscript.uidsl.Method;
-import com.dslconsultancy.uiscript.uidsl.Value;
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(StatementExtensionsImpl.class)

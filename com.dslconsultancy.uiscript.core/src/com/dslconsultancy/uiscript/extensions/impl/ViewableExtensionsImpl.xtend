@@ -1,12 +1,12 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
+import com.dslconsultancy.uiscript.core.DefinedViewable
+import com.dslconsultancy.uiscript.core.Element
+import com.dslconsultancy.uiscript.core.MethodDefinition
+import com.dslconsultancy.uiscript.core.Value
+import com.dslconsultancy.uiscript.core.Viewable
+import com.dslconsultancy.uiscript.core.ViewableTypes
 import com.dslconsultancy.uiscript.extensions.ViewableExtensions
-import com.dslconsultancy.uiscript.uidsl.DefinedViewable
-import com.dslconsultancy.uiscript.uidsl.Element
-import com.dslconsultancy.uiscript.uidsl.MethodDefinition
-import com.dslconsultancy.uiscript.uidsl.Value
-import com.dslconsultancy.uiscript.uidsl.Viewable
-import com.dslconsultancy.uiscript.uidsl.ViewableTypes
 import com.google.inject.Singleton
 
 @Singleton

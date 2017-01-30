@@ -2,38 +2,27 @@
 @GenModel(forceOverwrite="true", modelName="UIStatements", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.statements
 
-import com.dslconsultancy.uiscript.expressions.Expression
+import com.dslconsultancy.uiscript.core.AbstractValueDeclaration
+import com.dslconsultancy.uiscript.core.ArgumentList
+import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.IteratorVariable
+import com.dslconsultancy.uiscript.core.Statement
+import com.dslconsultancy.uiscript.core.StatementBlock
+import com.dslconsultancy.uiscript.core.UiModule
+import com.dslconsultancy.uiscript.core.ViewableCallSite
 import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
 import com.dslconsultancy.uiscript.types.Feature
-import com.dslconsultancy.uiscript.uidsl.AbstractValueDeclaration
-import com.dslconsultancy.uiscript.uidsl.ArgumentList
-import com.dslconsultancy.uiscript.uidsl.ListVariable
-import com.dslconsultancy.uiscript.uidsl.UiModule
-import com.dslconsultancy.uiscript.uidsl.Viewable
 
-class StatementBlock {
-	contains Statement[] statements
-}
 
-abstract class Statement {}
+/*
+ * Definitions of all statement sub types.
+ */
+
 
 abstract class ExitingStatement extends Statement {}
 
 abstract class NonExitingStatement extends Statement {}
 
-class ForStatement extends NonExitingStatement {
-	contains ListVariable indexVariable
-	contains ListVariable valueVariable
-	contains Expression listExpression
-	contains StatementBlock thenBlock
-}
-
-class ListRemoveStatement extends NonExitingStatement {
-	contains Expression listExpr
-	refers Feature<?> feature
-	contains Expression valueExpr
-	contains Expression indexVariable
-}
 
 class AssignmentOrExpressionStatement extends NonExitingStatement {
 	contains Expression lhs
@@ -47,13 +36,25 @@ enum AssignmentOperator {
 	sub as "-=" = 2
 }
 
-class ShowModalStatement extends NonExitingStatement, ViewableCallSite {
-	boolean persistent
+
+class ForStatement extends NonExitingStatement {
+	contains IteratorVariable indexVariable
+	contains IteratorVariable valueVariable
+	contains Expression listExpression
+	contains StatementBlock thenBlock
 }
 
-class ExitModalStatement extends NonExitingStatement {}
+
+class ListRemoveStatement extends NonExitingStatement {
+	contains Expression listExpr
+	refers Feature<?> feature
+	contains Expression valueExpr
+	contains Expression indexVariable
+}
+
 
 class GotoScreenStatement extends ExitingStatement, ViewableCallSite {}
+
 
 class GotoModuleStatement extends ExitingStatement {
 	refers UiModule targetModule
@@ -69,14 +70,11 @@ class IfStatement extends NonExitingStatement {
 	contains StatementBlock elseBlock
 }
 
+
 class LocalValueDeclarationStatement extends AbstractValueDeclaration, NonExitingStatement {}
+
 
 class UnsetStatement extends NonExitingStatement {
 	contains Expression lhs
-}
-
-class ViewableCallSite {
-	refers Viewable viewable
-	contains ArgumentList argumentList
 }
 

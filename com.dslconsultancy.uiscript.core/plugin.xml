@@ -23,14 +23,6 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UIDsl -->
-      <package
-            uri="http://www.dslconsultancy.com/uicript/uidsl"
-            class="com.dslconsultancy.uiscript.uidsl.UidslPackage"
-            genModel="meta-model/UIDsl.xcore"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Expressions -->
       <package
             uri="http://www.dslconsultancy.com/uicript/expressions"
@@ -52,6 +44,22 @@
             uri="http://www.dslconsultancy.com/uicript/expressionsAux"
             class="com.dslconsultancy.uiscript.expressions.aux.AuxPackage"
             genModel="meta-model/ExpressionsAux.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Elements -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/elements"
+            class="com.dslconsultancy.uiscript.elements.ElementsPackage"
+            genModel="meta-model/Elements.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Core -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/core"
+            class="com.dslconsultancy.uiscript.core.CorePackage"
+            genModel="meta-model/Core.xcore"/>
    </extension>
 
 </plugin>

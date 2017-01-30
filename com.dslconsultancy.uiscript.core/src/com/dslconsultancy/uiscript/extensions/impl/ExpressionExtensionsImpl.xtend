@@ -1,10 +1,13 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
+import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.Method
+import com.dslconsultancy.uiscript.core.Parameter
+import com.dslconsultancy.uiscript.core.Value
 import com.dslconsultancy.uiscript.expressions.BinaryOperatorExpression
 import com.dslconsultancy.uiscript.expressions.BuiltinFunctionExpression
 import com.dslconsultancy.uiscript.expressions.BuiltinFunctions
 import com.dslconsultancy.uiscript.expressions.DecisionExpression
-import com.dslconsultancy.uiscript.expressions.Expression
 import com.dslconsultancy.uiscript.expressions.FeatureAccessExpression
 import com.dslconsultancy.uiscript.expressions.LiteralExpression
 import com.dslconsultancy.uiscript.expressions.NotExpression
@@ -19,15 +22,12 @@ import com.dslconsultancy.uiscript.extensions.ReferableExtensions
 import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.types.TypeLiteral
-import com.dslconsultancy.uiscript.uidsl.ListVariable
-import com.dslconsultancy.uiscript.uidsl.Method
-import com.dslconsultancy.uiscript.uidsl.Parameter
-import com.dslconsultancy.uiscript.uidsl.Value
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import com.dslconsultancy.uiscript.core.IteratorVariable
 
 /**
  * Class with common extensions on {@link Expression expressions}.
@@ -57,7 +57,7 @@ class ExpressionExtensionsImpl implements ExpressionExtensions {
 
 	def private dispatch isLValue_(Value it)				{ variable }
 	def private dispatch isLValue_(Parameter it)			{ !(type.callback || type.voidTyped) }
-	def private dispatch isLValue_(ListVariable it) 		{ ifIndexVarThenElse([false], [valueVariableType.structureTyped]) as boolean }
+	def private dispatch isLValue_(IteratorVariable it) 		{ ifIndexVarThenElse([false], [valueVariableType.structureTyped]) as boolean }
 	def private dispatch isLValue_(Method it)				{ false }
 
 	// sentinel:

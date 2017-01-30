@@ -1,0 +1,167 @@
+@Ecore(nsURI="http://www.dslconsultancy.com/uicript/core")
+@GenModel(forceOverwrite="true", modelName="UICore", updateClasspath="false", complianceLevel="5.0")
+package com.dslconsultancy.uiscript.core
+
+import com.dslconsultancy.uiscript.types.DefinedType
+import com.dslconsultancy.uiscript.types.TypeLiteral
+
+
+/*
+ * Definition of all concepts that are "core" to the DSL
+ * also in the sense that they are referred to often by
+ * the various sub DSLs.
+ */
+
+
+/*
+ * +-----------+
+ * | auxiliary |
+ * +-----------+
+ */
+
+abstract class Named {
+	String name
+}
+
+
+abstract class Expression {}
+
+
+class UiModule {
+	contains Parametrisable[] parametrisables
+	contains DefinedType typeDefinitions
+}
+
+
+
+/*
+ * +------------+
+ * | referables |
+ * +------------+
+ */
+
+abstract class Referable extends Named {}
+
+class IteratorVariable extends Referable {}
+
+
+/*
+ * +-----------+
+ * | viewables |
+ * +-----------+
+ */
+
+abstract class Viewable extends Parametrisable, Named {
+	ViewableTypes ^type
+}
+
+enum ViewableTypes {
+	screen
+	component = 1
+}
+
+
+class DefinedViewable extends Viewable {
+	contains ValuesBlock valuesBlock
+	contains ViewableDefinition[] definitions
+}
+
+class ValuesBlock {
+	contains ValueDeclaration[] declarations
+}
+
+abstract class ViewableDefinition {}
+
+
+class ManualViewable extends Viewable {
+	String namespace
+}
+
+
+class ViewableCallSite {
+	refers Viewable viewable
+	contains ArgumentList argumentList
+}
+
+
+class Element extends ViewableDefinition {}
+
+
+/*
+ * +--------+
+ * | values |
+ * +--------+
+ */
+
+abstract class AbstractValueDeclaration {
+	contains Value value
+	contains TypeLiteral declaredType
+	contains Expression valueExpr
+}
+
+class Value extends Referable {}
+
+class ValueDeclaration extends AbstractValueDeclaration {
+	ValueSpecificationTypes valueSpecificationType
+}
+
+enum ValueSpecificationTypes {
+	initialization as "<-"
+	^invariant as "=" = 1
+}
+
+
+/*
+ * +---------+
+ * | methods |
+ * +---------+
+ */
+
+class Method extends Referable {}
+
+class MethodDefinition extends Parametrisable, ViewableDefinition {
+	contains Method method
+	contains StatementBlock statementBlock
+}
+
+
+/*
+ * +-----------------+
+ * | parametrisation |
+ * +-----------------+
+ */
+
+class Parameter extends Referable {
+	contains TypeLiteral ^type
+}
+
+class ParameterList {
+	contains Parameter[] parameters
+}
+
+abstract class Parametrisable {
+	contains ParameterList parameterList
+}
+
+class Argument {
+	refers Parameter parameter
+	contains Expression valueExpr
+}
+
+class ArgumentList {
+	contains Argument[] arguments
+}
+
+
+/*
+ * +------------+
+ * | statements |
+ * +------------+
+ */
+
+abstract class Statement {}
+
+class StatementBlock {
+	contains Statement[] statements
+}
+

@@ -2,12 +2,12 @@ package com.dslconsultancy.uiscript.extensions;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
+import com.dslconsultancy.uiscript.core.AbstractValueDeclaration;
+import com.dslconsultancy.uiscript.core.IteratorVariable;
+import com.dslconsultancy.uiscript.core.Value;
+import com.dslconsultancy.uiscript.elements.ListElement;
 import com.dslconsultancy.uiscript.extensions.impl.ReferableExtensionsImpl;
 import com.dslconsultancy.uiscript.types.TypeLiteral;
-import com.dslconsultancy.uiscript.uidsl.AbstractValueDeclaration;
-import com.dslconsultancy.uiscript.uidsl.ListElement;
-import com.dslconsultancy.uiscript.uidsl.ListVariable;
-import com.dslconsultancy.uiscript.uidsl.Value;
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(ReferableExtensionsImpl.class)
@@ -19,11 +19,11 @@ public interface ReferableExtensions {
 	AbstractValueDeclaration declaration(Value it);
 
 	/**
-	 * Finds the {@link ListElement} which defines the given {@link ListVariable}
+	 * Finds the {@link ListElement} which defines the given {@link IteratorVariable}
 	 * and performs the given Xtend functions for the case when it's the index or
 	 * the value variable.
 	 */
-	<T extends Object> T ifIndexVarThenElse(ListVariable it,
+	<T extends Object> T ifIndexVarThenElse(IteratorVariable it,
 			Function1<? super ListElement, ? extends T> indexFunc,
 			Function1<? super ListElement, ? extends T> valueFunc);
 
@@ -33,7 +33,7 @@ public interface ReferableExtensions {
 	boolean isVariable(Value it);
 
 	/**
-	 * @return The type of the <em>value</em> {@link ListVariable} of the {@link ListElement} given.
+	 * @return The type of the <em>value</em> {@link IteratorVariable} of the {@link ListElement} given.
 	 */
 	TypeLiteral valueVariableType(ListElement it);
 

@@ -2,12 +2,12 @@ package com.dslconsultancy.uiscript.extensions;
 
 import java.util.List;
 
+import com.dslconsultancy.uiscript.core.DefinedViewable;
+import com.dslconsultancy.uiscript.core.Element;
+import com.dslconsultancy.uiscript.core.MethodDefinition;
+import com.dslconsultancy.uiscript.core.Value;
+import com.dslconsultancy.uiscript.core.Viewable;
 import com.dslconsultancy.uiscript.extensions.impl.ViewableExtensionsImpl;
-import com.dslconsultancy.uiscript.uidsl.DefinedViewable;
-import com.dslconsultancy.uiscript.uidsl.Element;
-import com.dslconsultancy.uiscript.uidsl.MethodDefinition;
-import com.dslconsultancy.uiscript.uidsl.Value;
-import com.dslconsultancy.uiscript.uidsl.Viewable;
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(ViewableExtensionsImpl.class)

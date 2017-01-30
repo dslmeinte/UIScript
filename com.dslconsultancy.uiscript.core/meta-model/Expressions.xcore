@@ -2,13 +2,19 @@
 @GenModel(forceOverwrite="true", modelName="UIExpressions", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.expressions
 
+import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.Referable
 import com.dslconsultancy.uiscript.types.Enumeration
 import com.dslconsultancy.uiscript.types.EnumerationLiteral
 import com.dslconsultancy.uiscript.types.Feature
 import com.dslconsultancy.uiscript.types.Structure
 
 
-abstract class Expression {}
+/*
+ * Definitions of all expression sub types which reference only types
+ * from Core and Types.
+ */
+
 
 enum Comparator {
 	equals as "=="
@@ -90,10 +96,6 @@ abstract class ValueReferenceOrMethodCallExpression extends Expression {}
 
 class ReferenceExpression extends ValueReferenceOrMethodCallExpression {
 	refers Referable ref
-}
-
-class Referable {
-	String name
 }
 
 class TernaryExpression extends Expression {

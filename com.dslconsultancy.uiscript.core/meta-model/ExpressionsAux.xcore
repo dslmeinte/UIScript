@@ -2,18 +2,19 @@
 @GenModel(forceOverwrite="true", modelName="UIExpressionsAux", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.expressions.aux
 
-import com.dslconsultancy.uiscript.expressions.Expression
+import com.dslconsultancy.uiscript.core.ArgumentList
+import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.StatementBlock
 import com.dslconsultancy.uiscript.expressions.ReferenceExpression
 import com.dslconsultancy.uiscript.expressions.ValueReferenceOrMethodCallExpression
 import com.dslconsultancy.uiscript.services.Service
-import com.dslconsultancy.uiscript.statements.StatementBlock
-import com.dslconsultancy.uiscript.uidsl.ArgumentList
 
 
-/**
+/*
  * Some "auxiliary" expression sub types that reference types from other parts of the DSL,
  * so cannot be defined along the rest of the expression sub types.
  */
+
 
 abstract class CallbackExpressions extends Expression {}
 
