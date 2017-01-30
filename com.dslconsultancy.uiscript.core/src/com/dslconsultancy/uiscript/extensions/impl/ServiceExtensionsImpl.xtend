@@ -1,6 +1,7 @@
-package com.dslconsultancy.uiscript.services
+package com.dslconsultancy.uiscript.extensions.impl
 
-import com.dslconsultancy.uiscript.types.TypeExtensions
+import com.dslconsultancy.uiscript.extensions.ServiceExtensions
+import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.types.TypeLiteral
 import com.google.inject.Inject
 import com.google.inject.Singleton

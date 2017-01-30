@@ -1,5 +1,6 @@
-package com.dslconsultancy.uiscript.services;
+package com.dslconsultancy.uiscript.extensions;
 
+import com.dslconsultancy.uiscript.extensions.impl.ServiceExtensionsImpl;
 import com.dslconsultancy.uiscript.types.Structure;
 import com.dslconsultancy.uiscript.types.TypeLiteral;
 import com.google.inject.ImplementedBy;

@@ -22,4 +22,12 @@
             genModel="meta-model/Services.xcore"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UIDsl -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/uidsl"
+            class="com.dslconsultancy.uiscript.uidsl.UidslPackage"
+            genModel="meta-model/UIDsl.xcore"/>
+   </extension>
+
 </plugin>

@@ -1,7 +1,20 @@
-package com.dslconsultancy.uiscript.types;
+package com.dslconsultancy.uiscript.extensions;
 
 import java.util.List;
 
+import com.dslconsultancy.uiscript.extensions.impl.TypeExtensionsImpl;
+import com.dslconsultancy.uiscript.types.BuiltinTypeLiteral;
+import com.dslconsultancy.uiscript.types.BuiltinTypes;
+import com.dslconsultancy.uiscript.types.CallbackErrorResponseLiteral;
+import com.dslconsultancy.uiscript.types.CallbackLiteral;
+import com.dslconsultancy.uiscript.types.DefinedType;
+import com.dslconsultancy.uiscript.types.DefinedTypeLiteral;
+import com.dslconsultancy.uiscript.types.Enumeration;
+import com.dslconsultancy.uiscript.types.Feature;
+import com.dslconsultancy.uiscript.types.ListTypeLiteral;
+import com.dslconsultancy.uiscript.types.Structure;
+import com.dslconsultancy.uiscript.types.TypeLiteral;
+import com.dslconsultancy.uiscript.types.VoidLiteral;
 import com.google.inject.ImplementedBy;
 
 /**

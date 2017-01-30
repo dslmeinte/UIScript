@@ -1,5 +1,19 @@
-package com.dslconsultancy.uiscript.types
+package com.dslconsultancy.uiscript.extensions.impl
 
+import com.dslconsultancy.uiscript.extensions.TypeExtensions
+import com.dslconsultancy.uiscript.types.BuiltinTypeLiteral
+import com.dslconsultancy.uiscript.types.BuiltinTypes
+import com.dslconsultancy.uiscript.types.CallbackErrorResponseLiteral
+import com.dslconsultancy.uiscript.types.CallbackLiteral
+import com.dslconsultancy.uiscript.types.DefinedType
+import com.dslconsultancy.uiscript.types.DefinedTypeLiteral
+import com.dslconsultancy.uiscript.types.Enumeration
+import com.dslconsultancy.uiscript.types.Feature
+import com.dslconsultancy.uiscript.types.ListTypeLiteral
+import com.dslconsultancy.uiscript.types.Structure
+import com.dslconsultancy.uiscript.types.TypeLiteral
+import com.dslconsultancy.uiscript.types.TypesFactory
+import com.dslconsultancy.uiscript.types.VoidLiteral
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
 import com.google.inject.Singleton
