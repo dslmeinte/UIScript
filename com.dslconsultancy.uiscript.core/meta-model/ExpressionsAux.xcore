@@ -22,7 +22,7 @@ class CallbackExpression extends CallbackExpressions {
 	contains StatementBlock statementBlock
 }
 
-class InterfaceCallExpression extends Expression {
+class ServiceCallExpression extends Expression {
 	refers Service service
 	contains Expression[] observeSites
 	contains Expression input

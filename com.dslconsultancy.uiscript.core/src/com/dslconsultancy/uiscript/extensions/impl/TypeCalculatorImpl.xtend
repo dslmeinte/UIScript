@@ -31,8 +31,8 @@ import com.dslconsultancy.uiscript.expressions.TernaryExpression
 import com.dslconsultancy.uiscript.expressions.aux.CallbackErrorResponseExpression
 import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
 import com.dslconsultancy.uiscript.expressions.aux.CallbackResponseExpression
-import com.dslconsultancy.uiscript.expressions.aux.InterfaceCallExpression
 import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression
+import com.dslconsultancy.uiscript.expressions.aux.ServiceCallExpression
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
 import com.dslconsultancy.uiscript.extensions.MethodExtensions
 import com.dslconsultancy.uiscript.extensions.StatementExtensions
@@ -148,27 +148,27 @@ class TypeCalculatorImpl implements TypeCalculator {
 	}
 
 	def private dispatch type_(CallbackResponseExpression it) {
-		val interfaceCall = containerHaving(typeof(InterfaceCallExpression))
+		val interfaceCall = containerHaving(typeof(ServiceCallExpression))
 		if( interfaceCall == null ) {
 			unhandled
 		} else {
-			if( it == interfaceCall.input ) {
+			if( it == interfaceCall.getInput ) {
 				// 'response' is used as the parameter to an interface call, so it's type is determined by the "outer" call:
-				val outerCall = interfaceCall.eContainer.containerHaving(typeof(InterfaceCallExpression))
+				val outerCall = interfaceCall.eContainer.containerHaving(typeof(ServiceCallExpression))
 				if( outerCall == null ) {
 					unhandled
 				} else {
-					outerCall.service.outputType
+					outerCall.getService.outputType
 				}
 			} else {
-				interfaceCall.service.outputType
+				interfaceCall.getService.outputType
 			}
 		}
 	}
 
 	def private dispatch type_(CallbackExpression it)				{ createCallbackLiteral }
 	def private dispatch type_(CallbackErrorResponseExpression it)	{ createCallbackErrorResponseLiteral }
-	def private dispatch type_(InterfaceCallExpression it)			{ service.outputType }
+	def private dispatch type_(ServiceCallExpression it)			{ getService.outputType }
 	def private dispatch type_(StructureCreationExpression it)		{ structure.createDefinedTypeLiteral }
 
 	def private dispatch type_(ReferenceExpression it) {

@@ -1,6 +1,7 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
 import com.dslconsultancy.uiscript.core.Expression
+import com.dslconsultancy.uiscript.core.IteratorVariable
 import com.dslconsultancy.uiscript.core.Method
 import com.dslconsultancy.uiscript.core.Parameter
 import com.dslconsultancy.uiscript.core.Value
@@ -14,8 +15,8 @@ import com.dslconsultancy.uiscript.expressions.NotExpression
 import com.dslconsultancy.uiscript.expressions.ReferenceExpression
 import com.dslconsultancy.uiscript.expressions.TernaryExpression
 import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
-import com.dslconsultancy.uiscript.expressions.aux.InterfaceCallExpression
 import com.dslconsultancy.uiscript.expressions.aux.MethodCallExpression
+import com.dslconsultancy.uiscript.expressions.aux.ServiceCallExpression
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
 import com.dslconsultancy.uiscript.extensions.MethodExtensions
 import com.dslconsultancy.uiscript.extensions.ReferableExtensions
@@ -27,7 +28,6 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
-import com.dslconsultancy.uiscript.core.IteratorVariable
 
 /**
  * Class with common extensions on {@link Expression expressions}.
@@ -82,7 +82,7 @@ class ExpressionExtensionsImpl implements ExpressionExtensions {
 			NotExpression:				true
 			FeatureAccessExpression:	true
 			ReferenceExpression:		true
-			InterfaceCallExpression:	!it.observeSites.empty
+			ServiceCallExpression:	!it.observeSites.empty
 			BuiltinFunctionExpression:	it.function.observable && it.argument.observable
 			MethodCallExpression:		it.method.pure
 			DecisionExpression:			true
@@ -119,7 +119,7 @@ class ExpressionExtensionsImpl implements ExpressionExtensions {
 			NotExpression:				it.operand.valuesToObserve
 			FeatureAccessExpression:	it.observeSingleton
 			ReferenceExpression:		it.observeSingleton
-			InterfaceCallExpression:	it.observeSites.map[ e | e.valuesToObserve ].union
+			ServiceCallExpression:	it.observeSites.map[ e | e.valuesToObserve ].union
 			BuiltinFunctionExpression:	it.argument.valuesToObserve
 			MethodCallExpression:		methodExtensions.valuesToObserve(it)
 				/*
