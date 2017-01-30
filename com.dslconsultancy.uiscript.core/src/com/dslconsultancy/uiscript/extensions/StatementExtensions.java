@@ -2,10 +2,10 @@ package com.dslconsultancy.uiscript.extensions;
 
 import java.util.Set;
 
+import com.dslconsultancy.uiscript.expressions.Expression;
 import com.dslconsultancy.uiscript.extensions.impl.StatementExtensionsImpl;
 import com.dslconsultancy.uiscript.types.TypeLiteral;
 import com.dslconsultancy.uiscript.uidsl.AssignmentOrExpressionStatement;
-import com.dslconsultancy.uiscript.uidsl.Expression;
 import com.dslconsultancy.uiscript.uidsl.Method;
 import com.dslconsultancy.uiscript.uidsl.Statement;
 import com.dslconsultancy.uiscript.uidsl.StatementBlock;

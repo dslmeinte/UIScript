@@ -1,0 +1,180 @@
+@Ecore(nsURI="http://www.dslconsultancy.com/uicript/expressions")
+@GenModel(forceOverwrite="true", modelName="UIExpressions", updateClasspath="false", complianceLevel="5.0")
+package com.dslconsultancy.uiscript.expressions
+
+import com.dslconsultancy.uiscript.services.Service
+import com.dslconsultancy.uiscript.types.Enumeration
+import com.dslconsultancy.uiscript.types.EnumerationLiteral
+import com.dslconsultancy.uiscript.types.Feature
+import com.dslconsultancy.uiscript.types.Structure
+import com.dslconsultancy.uiscript.uidsl.CallbackExpression
+
+
+abstract class Expression {}
+
+enum Comparator {
+	equals as "=="
+	notEquals as "!=" = 1
+	bigger as ">" = 2
+	biggerEquals as ">=" = 3
+	smaller as "<" = 4
+	smallerEquals as "<=" = 5
+	isIn as "in" = 6
+}
+
+enum AdditiveOperators {
+	plus as "+"
+	minus as "-" = 1
+}
+
+enum MultiplicativeOperators {
+	mult as "*"
+	div as "/" = 1
+	mod as "%" = 2
+}
+
+class DateExpression extends Expression {}
+
+class BuiltinFunctionExpression extends Expression {
+	BuiltinFunctions function
+	contains Expression argument
+	refers Feature<?> sortFeature
+}
+
+enum BuiltinFunctions {
+	^isSet
+	confirm = 2		// has a boolean result
+	copyOf = 3
+	toMillis = 4
+	round = 5
+	sort = 6
+	isValid = 7
+	^id = 8
+}
+
+abstract class LiteralExpression extends Expression {}
+
+class ListLiteralExpression extends LiteralExpression {
+	contains Expression[] members
+}
+
+class EnumerationLiteralExpression extends LiteralExpression {
+	refers Enumeration enumeration
+	refers EnumerationLiteral literal
+}
+
+enum BooleanLiterals {
+	^false
+	^true = 1
+}
+
+class DecisionExpression extends LiteralExpression {
+	contains DecisionCase[] cases
+	contains Expression defaultValueExpr
+}
+
+class DecisionCase {
+	contains Expression guardExpr
+	contains Expression valueExpr
+}
+
+abstract class CallbackExpressions extends Expression {}
+
+// CallbackExpression needed to be defined in UIDsl
+
+class StructureCreationExpression extends Expression {
+	refers Structure structure
+	contains FeatureAssignment[] assignments
+}
+
+class FeatureAssignment {
+	refers Feature<?> feature
+	contains Expression valueExpr
+}
+
+abstract class ValueReferenceOrMethodCallExpression extends Expression {}
+
+class ReferenceExpression extends ValueReferenceOrMethodCallExpression {
+	refers Referable ref
+}
+
+class Referable {
+	String name
+}
+
+class TernaryExpression extends Expression {
+	contains Expression guard
+	contains Expression thenExpr
+	contains Expression elseExpr
+}
+
+class OrExpression extends BooleanBinaryOperatorExpression {}
+
+class AndExpression extends BooleanBinaryOperatorExpression {}
+
+class ComparisonExpression extends BinaryOperatorExpression {
+	Comparator comparator
+}
+
+class AdditiveExpression extends ArithmeticBinaryOperatorExpression {
+	AdditiveOperators operator
+}
+
+class MultiplicativeExpression extends ArithmeticBinaryOperatorExpression {
+	MultiplicativeOperators operator
+}
+
+class NotExpression extends Expression {
+	contains Expression operand
+}
+
+class InterfaceCallExpression extends Expression {
+	refers Service service
+	contains Expression[] observeSites
+	contains Expression input
+	contains CallbackExpression callback
+	contains CallbackExpression errorCallback
+}
+
+class FeatureAccessExpression extends Expression {
+	contains Expression previous
+	refers Feature<?> feature
+}
+
+class SelectionExpression extends Expression {}
+
+class DateNowExpression extends DateExpression {}
+
+class DateTodayExpression extends DateExpression {}
+
+class StringLiteralExpression extends LiteralExpression {
+	String value
+}
+
+class BooleanLiteralExpression extends LiteralExpression {
+	BooleanLiterals literal
+}
+
+class IntegerLiteralExpression extends LiteralExpression {
+	int value
+}
+
+class NumberLiteralExpression extends LiteralExpression {
+	BigDecimal value
+}
+
+class CallbackResponseExpression extends CallbackExpressions {}
+
+class CallbackErrorResponseExpression extends CallbackExpressions {}
+
+// MethodCallExpression needed to be defined in UIDsl
+
+class BooleanBinaryOperatorExpression extends BinaryOperatorExpression {}
+
+class ArithmeticBinaryOperatorExpression extends BinaryOperatorExpression {}
+
+abstract class BinaryOperatorExpression extends Expression {
+	contains Expression leftOperand
+	contains Expression rightOperand
+}
+

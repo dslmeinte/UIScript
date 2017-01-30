@@ -21,10 +21,18 @@ The Eclipse projects are:
 * `com.dslconsultancy.uiscript.core`: contains the type definitions for the AST in Xcore, helper classes (to be used as `extension`s in Xtend) and maybe some (code) generation.
 
 
+### Installation
+
+Import these projects into an Eclipse workspace.
+Note that it may be necessary to "touch" some Xtend files to actually get them to compile.
+
+
 ### Tricks/patterns
 
 At a number of places, implementations are explicitly separated from their interfaces using Google Guice's `@ImplementedBy` annotation.
 This is done for pure compilation/build speed when working on the DSL, since it prevents a cascading compilation/build "in Xtend-space" when only internals of an implementation are being changed.
+The drawback is the cyclic compile dependency (since both files refer the other).
+
 In these cases, the interface resides in a file `TypeExtensions.java` that contains e.g.
 
 ```

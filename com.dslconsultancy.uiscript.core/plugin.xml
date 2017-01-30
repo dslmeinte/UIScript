@@ -30,4 +30,12 @@
             genModel="meta-model/UIDsl.xcore"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Expressions -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/expressions"
+            class="com.dslconsultancy.uiscript.expressions.ExpressionsPackage"
+            genModel="meta-model/Expressions.xcore"/>
+   </extension>
+
 </plugin>

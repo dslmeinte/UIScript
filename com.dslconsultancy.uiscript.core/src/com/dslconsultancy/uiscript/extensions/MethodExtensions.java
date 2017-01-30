@@ -2,9 +2,9 @@ package com.dslconsultancy.uiscript.extensions;
 
 import java.util.Set;
 
+import com.dslconsultancy.uiscript.expressions.Expression;
 import com.dslconsultancy.uiscript.extensions.impl.MethodExtensionsImpl;
 import com.dslconsultancy.uiscript.uidsl.Argument;
-import com.dslconsultancy.uiscript.uidsl.Expression;
 import com.dslconsultancy.uiscript.uidsl.Method;
 import com.dslconsultancy.uiscript.uidsl.MethodCallExpression;
 import com.dslconsultancy.uiscript.uidsl.MethodDefinition;
