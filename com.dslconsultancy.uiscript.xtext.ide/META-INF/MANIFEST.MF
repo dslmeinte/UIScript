@@ -10,3 +10,6 @@ Require-Bundle: com.dslconsultancy.uiscript.xtext,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: com.dslconsultancy.uiscript.xtext.ide.contentassist.antlr.internal,
+ com.dslconsultancy.uiscript.xtext.ide.contentassist.antlr
+
