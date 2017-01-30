@@ -49,7 +49,7 @@ import static com.dslconsultancy.uiscript.types.BuiltinTypes.*
 
 /**
  * This class computes types of {@link Expression expressions} and other
- * SimScript-UI language constructs which can be construed as having an
+ * UIScript language constructs which can be construed as having an
  * (inferred) type. Types are represented by {@link TypeLiteral type
  * literals}. {@code void} is represented by {@link VoidLiteral}.
  * <p>

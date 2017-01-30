@@ -1,7 +1,5 @@
 package com.dslconsultancy.uiscript.extensions;
 
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 
 import com.dslconsultancy.uiscript.core.Argument;
@@ -11,8 +9,6 @@ import com.dslconsultancy.uiscript.core.Parametrisable;
 import com.dslconsultancy.uiscript.core.Viewable;
 import com.dslconsultancy.uiscript.core.ViewableCallSite;
 import com.dslconsultancy.uiscript.extensions.impl.StructuralExtensionsImpl;
-import com.dslconsultancy.uiscript.statements.GotoModuleStatement;
-import com.dslconsultancy.uiscript.statements.GotoScreenStatement;
 import com.dslconsultancy.uiscript.structural.UiModule;
 import com.google.inject.ImplementedBy;
 
@@ -38,30 +34,6 @@ public interface StructuralExtensions {
 	 * @return The first actual screen of this module.
 	 */
 	Viewable firstScreen(UiModule it);
-
-	/**
-	 * @return A {@link Set} of all modules explicitly called by this module,
-	 * 	through a {@code goto-module} {@link GotoModuleStatement statement}.
-	 */
-	Set<UiModule> calledModules(UiModule it);
-
-	/**
-	 * @return The {@link UiModule UI module} this {@link Viewable} resides in.
-	 */
-	UiModule module(Viewable it);
-
-	/**
-	 * @return A {@link Set} of all modules referenced by this {@link UiModule UI module}
-	 * 	either explicitly through a {@code goto-module} {@link GotoModuleStatement statement}
-	 * 	or implicitly through a {@code goto(-screen)} {@link GotoScreenStatement statement}
-	 * 	where the target screen is located in another module.
-	 */
-	Set<UiModule> referredModules(UiModule it);
-
-	/**
-	 * @return A {@link Set} of all modules (transitively) referred to by/from this module.
-	 */
-	Set<UiModule> allReferredModules(UiModule it);
 
 	/**
 	 * @return The containing {@link UiModule}.

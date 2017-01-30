@@ -8,13 +8,10 @@ import com.dslconsultancy.uiscript.core.Viewable
 import com.dslconsultancy.uiscript.core.ViewableCallSite
 import com.dslconsultancy.uiscript.extensions.StructuralExtensions
 import com.dslconsultancy.uiscript.extensions.ViewableExtensions
-import com.dslconsultancy.uiscript.statements.GotoModuleStatement
-import com.dslconsultancy.uiscript.statements.GotoScreenStatement
 import com.dslconsultancy.uiscript.structural.UiModule
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import java.util.Set
 import org.eclipse.emf.ecore.EObject
 
 @Singleton
@@ -39,35 +36,6 @@ class StructuralExtensionsImpl implements StructuralExtensions {
 	override firstScreen(UiModule it) {
 		viewables.findFirst[screen]
 	}
-
-	override calledModules(UiModule it) {
-		eAllContents.filter(typeof(GotoModuleStatement)).map[targetModule].toSet
-	}
-
-	override module(Viewable it) {
-		eContainer.checkedCast(typeof(UiModule))
-	}
-
-	override referredModules(UiModule it) {
-		val result = eAllContents.filter(typeof(GotoScreenStatement)).map[viewable.module].toSet
-		result.addAll(calledModules)
-		result.remove(it)
-		result.remove(null)		// FIXME  this should not be necessary!
-		return result
-	}
-
-	override allReferredModules(UiModule it) {
-		val modules = <UiModule>newHashSet as Set<UiModule>
-		visitModules(modules)
-		return modules
-	}
-
-	def private void visitModules(UiModule currentModule, Set<UiModule> visitedModules) {
-		val referredModules = currentModule.referredModules
-		visitedModules += currentModule
-		referredModules.filter[!visitedModules.contains(it)].forEach[visitModules(visitedModules)]
-	}
-
 
 	override containingModule(EObject it) {
 		eResource.contents.head.checkedCast(typeof(UiModule))

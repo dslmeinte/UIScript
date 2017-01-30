@@ -1,0 +1,17 @@
+ui-module
+
+screen screen1() {
+	
+	values {
+		counter := 1
+	}
+
+	block() {
+		bind(counter)
+		button(text="Increment counter" onClick={
+			counter += 1
+		})
+	}
+
+}
+

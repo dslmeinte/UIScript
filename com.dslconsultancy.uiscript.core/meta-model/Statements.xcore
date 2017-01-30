@@ -3,14 +3,11 @@
 package com.dslconsultancy.uiscript.statements
 
 import com.dslconsultancy.uiscript.core.AbstractValueDeclaration
-import com.dslconsultancy.uiscript.core.ArgumentList
 import com.dslconsultancy.uiscript.core.Expression
 import com.dslconsultancy.uiscript.core.IteratorVariable
 import com.dslconsultancy.uiscript.core.Statement
 import com.dslconsultancy.uiscript.core.StatementBlock
 import com.dslconsultancy.uiscript.core.ViewableCallSite
-import com.dslconsultancy.uiscript.expressions.aux.CallbackExpression
-import com.dslconsultancy.uiscript.structural.UiModule
 import com.dslconsultancy.uiscript.types.Feature
 
 
@@ -42,14 +39,6 @@ class ForStatement extends NonExitingStatement {
 	contains IteratorVariable valueVariable
 	contains Expression listExpression
 	contains StatementBlock thenBlock
-}
-
-
-class GotoModuleStatement extends ExitingStatement {
-	refers UiModule targetModule
-	contains ArgumentList args
-	boolean authenticate
-	contains CallbackExpression errorCallback
 }
 
 

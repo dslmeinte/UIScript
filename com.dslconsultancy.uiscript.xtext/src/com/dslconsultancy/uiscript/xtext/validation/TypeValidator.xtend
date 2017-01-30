@@ -80,7 +80,7 @@ class TypeValidator extends ValidatorSupport {
 	@Check
 	def synthetic_type_not_used_here(SyntheticTypeLiteral it) {
 		if( !voidTyped && EcoreUtil.getRootContainer(it) instanceof UiModule ) {
-			error("synthetic callback types can not be used in SimScript-Structure", this)
+			error("synthetic callback types can not be used in Structure", this)
 		}
 	}
 

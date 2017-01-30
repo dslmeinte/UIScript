@@ -152,7 +152,7 @@ SyntheticTypeLiteral returns types::SyntheticTypeLiteral:
 	| {types::CallbackErrorResponseLiteral} 'Error'		// semantics: the (type literal of) the response returned when an interface (AJAX) call fails
 	| {types::VoidLiteral} '$Void'						// semantics: the (type literal of) void type
 	;
-	// validation: synthetic types can't be used in SimScript-Structure		[√]
+	// validation: synthetic types can't be used in Structure		[√]
 
 
 
@@ -274,8 +274,8 @@ ValueDeclaration returns ValueDeclaration:
 	// (TODO  straighten spec out)
 
 enum ValueSpecificationTypes returns ValueSpecificationTypes:
-	  initialization='<-'
-	| invariant='='
+	  initialization=':='
+	| invariant='=='
 	;
 
 
@@ -491,7 +491,6 @@ Statement returns Statement:	// (synthetic type)
 
 ExitingStatement returns statements::ExitingStatement:
 	  GotoScreenStatement
-	| GotoModuleStatement
 	;
 
 NonExitingStatement returns statements::NonExitingStatement:
@@ -522,7 +521,7 @@ AssignmentOrExpressionStatement returns statements::AssignmentOrExpressionStatem
 
 
 enum AssignmentOperator returns statements::AssignmentOperator:
-	  assign='='
+	  assign='<-'
 	| add='+='
 	| sub='-='
 	;
@@ -553,22 +552,6 @@ GotoScreenStatement returns statements::GotoScreenStatement:
 	// scoping: viewable == all(Viewable)-in-this-resource.filter[screen]	[√]
 	/*
 	 * Call syntax is now aligned with declaration syntax because '(..)' are required.
-	 */
-
-GotoModuleStatement returns statements::GotoModuleStatement:
-	'goto-module' targetModule=[structural::UiModule] args=ArgumentList
-	/*
-	 * (I'd rather use 'argumentList' instead 'args' but that triggers
-	 * the duplicate feature validation of Xtext - whether that's incorrect or not.)
-	 */
-	(
-		'@error:' errorCallback=CallbackExpression
-	)?
-	;
-	/*
-	 * validation:
-	 * 		1-  principals contains all principals of authOption.principals		[V]
-	 * 		2-	credentials contains all credentials of authOption.credentials	[V]
 	 */
 
 IfStatement returns statements::IfStatement:

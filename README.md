@@ -19,12 +19,16 @@ The later two can be [downloaded here](http://www.eclipse.org/Xtext/download.htm
 The Eclipse projects are:
 
 * `com.dslconsultancy.uiscript.core`: contains the type definitions for the AST in Xcore, helper classes (to be used as `extension`s in Xtend) and maybe some (code) generation.
+* `com.dslconsultancy.uiscript.xtext*`: the usual set of Xtext-related Eclipse projects.
+* `uiscript-examples`: contains some example "prose" in UIScript-format.
 
 
 ### Installation
 
-Import these projects into an Eclipse workspace.
+Import all projects, except for `uiscript-examples` into an Eclipse workspace.
 Note that it may be necessary to "touch" some Xtend files to actually get them to compile.
+As soon as this is error-free, you can start the `com.dslconsultancy.uiscript.xtext.ui` project as Eclipse Application.
+In the 2nd Eclipse, import the `uiscript-examples` project for some examples.
 
 
 ### Tricks/patterns

@@ -11,7 +11,6 @@ import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.statements.AssignmentOperator
 import com.dslconsultancy.uiscript.statements.AssignmentOrExpressionStatement
-import com.dslconsultancy.uiscript.statements.GotoModuleStatement
 import com.dslconsultancy.uiscript.statements.IfStatement
 import com.dslconsultancy.uiscript.statements.ListRemoveStatement
 import com.dslconsultancy.uiscript.statements.StatementsPackage
@@ -52,8 +51,9 @@ class StatementValidator extends ValidatorSupport {
 	@Check
 	def void check_lhs_is_list_typed_if_add_operator_is_used(AssignmentOrExpressionStatement it) {
 		if( rhs != null && operator == AssignmentOperator.ADD ) {
-			if( !lhs.type.listTyped ) {
-				error("lhs must be list-typed if you are using the += operator", statementsPackage.assignmentOrExpressionStatement_Lhs)
+			val type = lhs.type
+			if( !(type.listTyped || type.numericallyTyped || type.stringTyped) ) {
+				error("lhs must have a sensible addition if you are using the += operator", statementsPackage.assignmentOrExpressionStatement_Lhs)
 			}
 		}
 	}
@@ -86,7 +86,8 @@ class StatementValidator extends ValidatorSupport {
 					error("value to unset must be a string or a structure", statementsPackage.unsetStatement_Lhs)
 				}
 			}
-			default:					error("value to unset must be a valid l-value", statementsPackage.unsetStatement_Lhs)
+			default:
+				error("value to unset must be a valid l-value", statementsPackage.unsetStatement_Lhs)
 		}
 	}
 
@@ -125,15 +126,6 @@ class StatementValidator extends ValidatorSupport {
 		if( feature != null && !feature.type.isAssignableFrom(valueExpr.type) ) {
 			error('''value expression is not type-compatible with feature type: «feature.type.toLiteral» (f) vs. «valueExpr.type.toLiteral» (v)'''.toString, statementsPackage.listRemoveStatement_ValueExpr)
 		}
-	}
-
-	@Check
-	def void check_GotoModuleStatement_has_required_parameters(GotoModuleStatement it) {
-	    for( parameter : targetModule.firstScreen.parameters ) {
-	        if( !args.arguments.map[parameter].contains(parameter) ) {
-	            error('''you must suply parameter «parameter.name»'''.toString, statementsPackage.gotoModuleStatement_Args)
-	        }
-	    }
 	}
 
 }

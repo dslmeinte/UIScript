@@ -18,7 +18,6 @@ import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.extensions.ViewableExtensions
 import com.dslconsultancy.uiscript.statements.ForStatement
-import com.dslconsultancy.uiscript.statements.GotoModuleStatement
 import com.dslconsultancy.uiscript.statements.ListRemoveStatement
 import com.dslconsultancy.uiscript.structural.UiModule
 import com.dslconsultancy.uiscript.util.XtextUtil
@@ -77,10 +76,6 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 	 * | statements |
 	 * +------------+
 	 */
-
-	def IScope scope_Argument_parameter(GotoModuleStatement it, EReference eRef) {
-	    scopeFor(targetModule.firstScreen.parameters)
-	}
 
 	def IScope scope_GotoScreenStatement_viewable(UiModule it, EReference eRef) {
 		scopeFor(viewables.filter[screen])
