@@ -31,7 +31,7 @@ class StructuralValidator extends ValidatorSupport {
 
 	@Check
 	def void check_at_least_one_screen(UiModule it) {
-		if( firstScreen == null ) {
+		if( firstScreen === null ) {
 			error("UI module must have at least one screen", this)
 		}
 	}
@@ -47,12 +47,12 @@ class StructuralValidator extends ValidatorSupport {
 	def void check_well_definedness_of(ValueDeclaration it) {
 		switch valueSpecificationType {
 			case INITIALIZATION: {
-				if( declaredType == null && valueExpr == null ) {
+				if( declaredType === null && valueExpr === null ) {
 					error("variable declaration must have either a declared type, a defined initialisation value (or both)", this)
 				}
 			}
 			case INVARIANT: {
-				if( valueExpr == null ) {
+				if( valueExpr === null ) {
 					error("derived value must have a declared expression", this)
 				} else {
 					if( !valueExpr.isObservable ) {
@@ -65,7 +65,7 @@ class StructuralValidator extends ValidatorSupport {
 
 	@Check
 	def void check_declared_type_is_compatible_with_initialisation_value(AbstractValueDeclaration it) {
-		if( valueExpr != null && declaredType != null ) {
+		if( valueExpr !== null && declaredType !== null ) {
 			val initType = valueExpr.type
 			if( !declaredType.typeCompatible(valueExpr) ) {
 				error(

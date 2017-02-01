@@ -741,6 +741,7 @@ EnumerationLiteralExpression returns expr::EnumerationLiteralExpression hidden()
 
 
 // (re-def. of INT)
+@Override
 terminal INT returns ecore::EInt: '-'? ('0'..'9')+;
 
 // (datatype rule)

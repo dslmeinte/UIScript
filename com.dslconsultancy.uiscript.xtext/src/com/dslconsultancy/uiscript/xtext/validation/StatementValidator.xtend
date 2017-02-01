@@ -43,14 +43,14 @@ class StatementValidator extends ValidatorSupport {
 
 	@Check
 	def void check_lhs_is_a_valid_l_value(AssignmentOrExpressionStatement it) {
-		if( rhs != null && !lhs.isLValue ) {
+		if( rhs !== null && !lhs.isLValue ) {
 			error("lhs must be a valid l-value", statementsPackage.assignmentOrExpressionStatement_Lhs)
 		}
 	}
 
 	@Check
 	def void check_lhs_is_list_typed_if_add_operator_is_used(AssignmentOrExpressionStatement it) {
-		if( rhs != null && operator == AssignmentOperator.ADD ) {
+		if( rhs !== null && operator == AssignmentOperator.ADD ) {
 			val type = lhs.type
 			if( !(type.listTyped || type.numericallyTyped || type.stringTyped) ) {
 				error("lhs must have a sensible addition if you are using the += operator", statementsPackage.assignmentOrExpressionStatement_Lhs)
@@ -60,7 +60,7 @@ class StatementValidator extends ValidatorSupport {
 
 	@Check
 	def void check_lhs_is_type_compatible_with_rhs(AssignmentOrExpressionStatement it) {
-		if( rhs != null ) {
+		if( rhs !== null ) {
 			if( switch operator {
 					case ASSIGN:	!lhs.type.isAssignableFrom(rhs.type)
 					case ADD:		lhs.type.listTyped && !lhs.type.listItemType.isAssignableFrom(rhs.type)
@@ -123,7 +123,7 @@ class StatementValidator extends ValidatorSupport {
 			error('''list expression must yield a list (instead of a «listExpr.type.toLiteral»)'''.toString, statementsPackage.listRemoveStatement_ListExpr)
 		}
 
-		if( feature != null && !feature.type.isAssignableFrom(valueExpr.type) ) {
+		if( feature !== null && !feature.type.isAssignableFrom(valueExpr.type) ) {
 			error('''value expression is not type-compatible with feature type: «feature.type.toLiteral» (f) vs. «valueExpr.type.toLiteral» (v)'''.toString, statementsPackage.listRemoveStatement_ValueExpr)
 		}
 	}

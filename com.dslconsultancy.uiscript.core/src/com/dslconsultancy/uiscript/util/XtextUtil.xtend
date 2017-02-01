@@ -85,7 +85,7 @@ class XtextUtil {
 	def void logProblem(EObject it, CharSequence message) {
 		var node = NodeModelUtils.findActualNodeFor(it)
 		// fallback:
-		if( node == null ) {
+		if( node === null ) {
 			node = NodeModelUtils.getNode(it)
 		}
 		System.err.println('''«message»; location: L«node.totalStartLine» in «eResource.URI»''')

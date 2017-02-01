@@ -21,7 +21,7 @@ class ViewableExtensionsImpl implements ViewableExtensions {
 	}
 
 	override values(DefinedViewable it) {
-		if( valuesBlock == null ) {
+		if( valuesBlock === null ) {
 			<Value>emptyList
 		} else {
 			valuesBlock.declarations.map[value]

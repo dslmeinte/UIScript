@@ -33,12 +33,12 @@ class StatementExtensionsImpl implements StatementExtensions {
 
 
 	override isAssignment(AssignmentOrExpressionStatement it) {
-		rhs != null
+		rhs !== null
 	}
 
 
 	override isExpression(AssignmentOrExpressionStatement it) {
-		rhs == null
+		rhs === null
 	}
 
 

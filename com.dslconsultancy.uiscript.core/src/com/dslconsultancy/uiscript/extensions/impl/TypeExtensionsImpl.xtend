@@ -73,7 +73,7 @@ class TypeExtensionsImpl implements TypeExtensions {
 	override isStructureTyped(TypeLiteral it)	{ definedTyped && (it as DefinedTypeLiteral).type instanceof Structure }
 	override isEnumerationTyped(TypeLiteral it)	{ definedTyped && (it as DefinedTypeLiteral).type instanceof Enumeration }
 	override isCallback(TypeLiteral it)			{ it instanceof CallbackLiteral }
-	override isVaguelyTyped(TypeLiteral it)		{ listTyped && (it as ListTypeLiteral).itemType == null }
+	override isVaguelyTyped(TypeLiteral it)		{ listTyped && (it as ListTypeLiteral).itemType === null }
 	override isVoidTyped(TypeLiteral it)		{ it instanceof VoidLiteral }
 
 	def private isLinkedTyped(TypeLiteral it) 	{ !(simpleTyped || listTyped) }

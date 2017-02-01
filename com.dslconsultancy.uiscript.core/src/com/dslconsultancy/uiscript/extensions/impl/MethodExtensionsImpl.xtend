@@ -33,7 +33,7 @@ class MethodExtensionsImpl implements MethodExtensions {
 
 	override isFunction(Method it) {
 		val last = definition.statementBlock.statements.last
-		if( last == null ) false else last.hasResultValue
+		if( last === null ) false else last.hasResultValue
 	}
 
 	override arguments(MethodCallExpression it) {

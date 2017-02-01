@@ -32,14 +32,14 @@ class ServiceValidator extends ValidatorSupport {
 
 	@Check
 	def check_output_type_of_interface(Service it) {
-		if( outputType != null && !outputType.correctlyTypedOutput ) {
+		if( outputType !== null && !outputType.correctlyTypedOutput ) {
 			error("output type of an interface must be a structure or a list of structures", servicesPackage.service_OutputType)
 		}
 	}
 
 	@Check
 	def check_non_sensical_definition(Service it) {
-		if( inputType == null && outputType == null ) {
+		if( inputType === null && outputType === null ) {
 			error("interface must have either an input, an output or both", this)
 		}
 	}

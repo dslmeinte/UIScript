@@ -101,7 +101,7 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 	}
 
 	def IScope scope_FeatureAccessExpression_feature(FeatureAccessExpression it, EReference eRef) {
-		if( previous.type == null ) {
+		if( previous.type === null ) {
 //			println("[DEBUG] scope_FeatureAccessExpression_feature returns empty scope <== previous.type == null")
 			IScope.NULLSCOPE
 		} else {
@@ -116,7 +116,7 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 	def IScope scope_Referable(ListElement it, EReference eRef) {
 		val listVariables = newArrayList(it.indexVariable, it.valueVariable)
 		val containingListElement = eContainer.containerHaving(typeof(ListElement))
-		if( containingListElement != null ) {
+		if( containingListElement !== null ) {
 			scopeFor(listVariables, scope_Referable(containingListElement, eRef))
 		} else {
 			scopeFor(listVariables, scope_Referable(containerHaving(typeof(DefinedViewable)), eRef))
@@ -126,7 +126,7 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 	def IScope scope_Referable(ForStatement it, EReference eRef) {
         val listVariables = newArrayList(it.indexVariable, it.valueVariable)
         val containingListElement = eContainer.containerHaving(typeof(ForStatement))
-        if( containingListElement != null ) {
+        if( containingListElement !== null ) {
             scopeFor(listVariables, scope_Referable(containingListElement, eRef))
         } else {
             scopeFor(listVariables, scope_Referable(containerHaving(typeof(Statement)), eRef))
@@ -147,7 +147,7 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 
 	def IScope scope_Referable(Statement it, EReference eRef) {
 		val containingMethod = containerHaving(typeof(MethodDefinition))
-		if( containingMethod != null ) {
+		if( containingMethod !== null ) {
 			scopeFor(precedingLocalValues, scope_Referable(containingMethod, eRef))
 		} else {
 			super.getScope(it.eContainer, eRef)

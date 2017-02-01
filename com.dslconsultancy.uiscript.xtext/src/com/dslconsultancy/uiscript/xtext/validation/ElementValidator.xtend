@@ -87,7 +87,7 @@ class ElementValidator extends ValidatorSupport {
 
 	@Check
 	def void check_block_onClick_is_callback(BlockElement it) {
-		if( onClick != null && !onClick.type.callback ) {
+		if( onClick !== null && !onClick.type.callback ) {
 			error("onClick must be a Callback", elementsPackage.blockElement_OnClick)
 		}
 	}
@@ -108,7 +108,7 @@ class ElementValidator extends ValidatorSupport {
 		if( !(type.simpleTyped || type.definedTyped) ) {
 			error("the bind site of an input must be simple-typed (primitive, built-in), enumeration-typed or structure-typed", elementsPackage.inputElement_BindSite)
 		}
-		if( type.structureTyped && structureOption == null ) {
+		if( type.structureTyped && structureOption === null ) {
 			error("structure options (syntax: \"source={ <source-expression> -> <display function> }\") must be present for structure-typed bind site", elementsPackage.inputElement_BindSite)
 		}
 	}
@@ -117,42 +117,42 @@ class ElementValidator extends ValidatorSupport {
 	def void check_options_of(InputElement it) {	// explicit void return type because otherwise inferred return type is Object
 		val type = bindSite.type
 
-		if( hint != null ) {
+		if( hint !== null ) {
 			if( !( type.stringTyped || type.textTyped || type.emailTyped || type.integerTyped || type.numberTyped ) ) {
 				warning("hint not supported (yet) for this type of input", elementsPackage.inputElement_Hint)
 			}	// (password widget has placeholder but it's shown as *****...)
 		}
 
 		if( type.numericallyTyped ) {
-			if( minValue != null && !minValue.type.numericallyTyped ) {
+			if( minValue !== null && !minValue.type.numericallyTyped ) {
 				error("min-value must be numerically-typed", elementsPackage.inputElement_MinValue)
 			}
-			if( maxValue != null && !maxValue.type.numericallyTyped ) {
+			if( maxValue !== null && !maxValue.type.numericallyTyped ) {
 				error("max-value must be numerically-typed", elementsPackage.inputElement_MaxValue)
 			}
 		} else {
-			if( minValue != null ) {
+			if( minValue !== null ) {
 				error("min-value can only be used with a numerically-typed bind site", elementsPackage.inputElement_MinValue)
 			}
-			if( maxValue != null ) {
+			if( maxValue !== null ) {
 				error("max-value can only be used with a numerically-typed bind site", elementsPackage.inputElement_MaxValue)
 			}
 		}
 
-		if( radioOption != null ) {
+		if( radioOption !== null ) {
 			if( !type.booleanTyped ) {
 				error("radio option is only valid for a boolean-typed bind site", elementsPackage.inputElement_RadioOption)
 			}
 		}
 
-		if( onChange != null ) {
+		if( onChange !== null ) {
 			if( !onChange.type.callback ) {
 				error("onChange must be a Callback", elementsPackage.inputElement_OnChange)
 			}
 			warning("onChange not supported (yet)", elementsPackage.inputElement_OnChange)
 		}
 
-		if( onSubmit != null ) {
+		if( onSubmit !== null ) {
 			if( !onSubmit.type.callback ) {
 				error("onSubmit must be a Callback", elementsPackage.inputElement_OnSubmit)
 			}
@@ -181,7 +181,7 @@ class ElementValidator extends ValidatorSupport {
 		val it = method.definition
 		val param1 = parameters.head
 
-		   param1 != null
+		   param1 !== null
 		&& param1.type.structureTyped
 		&& param1.type.structure == structure
 		&& method.function

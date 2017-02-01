@@ -158,7 +158,7 @@ class ExpressionValidator extends ValidatorSupport {
 
 	@Check
 	def void check_argument_count_matches_parameters(ServiceCallExpression it) {
-		if( service.inputType == null && getInput != null ) {
+		if( service.inputType === null && getInput !== null ) {
 			error("this interface has no input type, so there is no sense in giving it stuff", exprAuxPackage.serviceCallExpression_Input)
 		}
 	}
@@ -166,7 +166,7 @@ class ExpressionValidator extends ValidatorSupport {
 	@Check
 	def void check_parameters_and_arguments_are_type_compatible(ServiceCallExpression it) {
 		// ASSUMES that if inputType == null, it means the service expected no input (or was a legacy servlet, which was handled above):
-		if( service.inputType != null && !service.inputType.isAssignableFrom(getInput.type) ) {
+		if( service.inputType !== null && !service.inputType.isAssignableFrom(getInput.type) ) {
 			error(
 				'''input to interface call must be type-compatible with declared input type: «service.inputType.toLiteral» (param) vs. «getInput.type.toLiteral» (arg)'''.toString,
 				exprAuxPackage.serviceCallExpression_Input
@@ -187,24 +187,6 @@ class ExpressionValidator extends ValidatorSupport {
 		}
 	}
 
-
-	/*
-	@Check
-	def check_crud_service_is_defined_somewhere(CrudServiceIdentification crudServiceId) {
-		val allBackendModels = crudServiceId.eResource.resourceSet.resources.map[contents.head].filter(typeof(BackendModel))
-		// This would work only if BackendModel had incoming references, but they only have outgoing references...
-		val allCrudServices = allBackendModels.map[declarations.filter(typeof(CrudService))].flatten
-		val halfMatchingCrudServices = allCrudServices.filter[it.structure == crudServiceId.structure]
-		if( halfMatchingCrudServices.size == 0 ) {
-			error("no CRUD service defined for structure " + crudServiceId.structure.name, ePackage.crudServiceIdentification_Structure)
-		} else {
-			val crudTypeName = crudServiceId.crudType.name
-			if( !halfMatchingCrudServices.exists[it.services.map[ t | t.name ].contains(crudTypeName)] ) {
-				error("no CRUD defined for structure " + crudServiceId.structure.name + " which provide CRUD type " + crudTypeName, ePackage.crudServiceIdentification_CrudType)
-			}
-		}
-	}
-	 */
 
 	@Check
 	def void check_feature_access_operator_invoked_on_something_having_features(FeatureAccessExpression it) {
@@ -245,7 +227,7 @@ class ExpressionValidator extends ValidatorSupport {
 							}
 			default:		{ /* nothing to check */ }
 		}
-		if( function != SORT && sortFeature != null ) {
+		if( function != SORT && sortFeature !== null ) {
 			error("sort feature can only be specified for the sort function", exprPackage.builtinFunctionExpression_SortFeature)
 		}
 	}
@@ -264,14 +246,14 @@ class ExpressionValidator extends ValidatorSupport {
 
 	@Check
 	def void check_callback_values_may_only_be_used_within_callbacks(CallbackErrorResponseExpression it) {
-		if( containerHaving(typeof(CallbackExpression)) == null ) {
+		if( containerHaving(typeof(CallbackExpression)) === null ) {
 			error("callback error response may only be used within a callback", this)
 		}
 	}
 
 	@Check
 	def void check_callback_values_may_only_be_used_within_callbacks(CallbackResponseExpression it) {
-		if( containerHaving(typeof(CallbackExpression)) == null ) {
+		if( containerHaving(typeof(CallbackExpression)) === null ) {
 			error("callback response may only be used within a callback", this)
 		}
 	}
@@ -321,7 +303,7 @@ class ExpressionValidator extends ValidatorSupport {
 		if( cases.empty ) {
 			warning("decision expression is useless without cases", this)
 		}
-		if( defaultValueExpr != null && !type.isAssignableFrom(defaultValueExpr.type) ) {
+		if( defaultValueExpr !== null && !type.isAssignableFrom(defaultValueExpr.type) ) {
 			error('''default value expression is not type-compatible with return type: «type.toLiteral» (r) vs. «defaultValueExpr.type.toLiteral» (v)'''.toString, exprPackage.decisionExpression_DefaultValueExpr)
 		}
 	}

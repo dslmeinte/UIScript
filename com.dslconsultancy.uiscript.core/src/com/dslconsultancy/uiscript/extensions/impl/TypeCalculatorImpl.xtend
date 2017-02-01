@@ -87,7 +87,7 @@ class TypeCalculatorImpl implements TypeCalculator {
 	 */
 
 	override TypeLiteral type(Expression it) {
-		if( it == null ) {
+		if( it === null ) {
 			System.err.println("WARNING	type calculation invoked on null; stacktrace:")
 			new RuntimeException().printStackTrace(System.err)
 			return null
@@ -149,13 +149,13 @@ class TypeCalculatorImpl implements TypeCalculator {
 
 	def private dispatch type_(CallbackResponseExpression it) {
 		val interfaceCall = containerHaving(typeof(ServiceCallExpression))
-		if( interfaceCall == null ) {
+		if( interfaceCall === null ) {
 			unhandled
 		} else {
 			if( it == interfaceCall.getInput ) {
 				// 'response' is used as the parameter to an interface call, so it's type is determined by the "outer" call:
 				val outerCall = interfaceCall.eContainer.containerHaving(typeof(ServiceCallExpression))
-				if( outerCall == null ) {
+				if( outerCall === null ) {
 					unhandled
 				} else {
 					outerCall.getService.outputType
@@ -172,7 +172,7 @@ class TypeCalculatorImpl implements TypeCalculator {
 	def private dispatch type_(StructureCreationExpression it)		{ structure.createDefinedTypeLiteral }
 
 	def private dispatch type_(ReferenceExpression it) {
-		return if( ref == null || ref.eIsProxy ) null else ref.refType
+		return if( ref === null || ref.eIsProxy ) null else ref.refType
 	}
 
 	def private dispatch type_(DateExpression it)					{ DATE.createBuiltinTypeLiteral }
@@ -212,7 +212,7 @@ class TypeCalculatorImpl implements TypeCalculator {
 
 	def private TypeLiteral refType(Referable it) {
 		switch it {
-			Value:			if( declaration.declaredType == null ) { declaration.valueExpr?.type_ } else { declaration.declaredType }	// (returns null in case of parse/validation error)
+			Value:			if( declaration.declaredType === null ) { declaration.valueExpr?.type_ } else { declaration.declaredType }	// (returns null in case of parse/validation error)
 			Parameter:		it.type
 			IteratorVariable:	<TypeLiteral>ifIndexVarThenElse( [INTEGER.createBuiltinTypeLiteral], [valueVariableType] )
 			Method:			it.returnType
