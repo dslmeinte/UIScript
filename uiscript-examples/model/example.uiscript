@@ -1,7 +1,7 @@
 ui-module
 
 screen screen1() {
-	
+
 	values {
 		counter := 1
 	}

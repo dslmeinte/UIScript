@@ -1,0 +1,4 @@
+node_modules/
+src-gen/
+web/bundle.js
+yarn.lock

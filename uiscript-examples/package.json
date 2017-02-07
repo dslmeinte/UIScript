@@ -1,0 +1,33 @@
+{
+  "name": "uiscript-examples",
+  "version": "0.1.0",
+  "description": "An example app using UIScript.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dslmeinte/UIScript.git"
+  },
+  "author": "Meinte Boersma",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.6",
+    "@types/react-dom": "^0.14.22",
+    "browserify": "^14.0.0",
+    "http-server": "^0.9.0",
+    "rimraf": "^2.5.4",
+    "tsify": "^3.0.1",
+    "tslib": "^1.5.0",
+    "typescript": "^2.2.0",
+    "watchify": "^3.9.0"
+  },
+  "scripts": {
+    "clean": "rimraf node_modules && rm web/bundle.js",
+    "build": "browserify src/index.ts -p [tsify] -o web/bundle.js",
+    "watch": "watchify src/index.ts -p [tsify] -o web/bundle.js -v",
+    "start": "http-server -p 8000 web"
+  }
+}
