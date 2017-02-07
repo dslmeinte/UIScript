@@ -8,6 +8,7 @@ Roughly in order of descending importance:
 
 	* Comments up-to-date?
 	* **TODO**s still relevant?
+	* Implementation of outline.
 
 * Small tweaks:
 

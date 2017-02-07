@@ -5,7 +5,7 @@ A DSL for building UIs, with (currently/at least) a textual syntax.
 
 ## Installation
 
-Import all projects, except for `uiscript-examples` into an Eclipse workspace.
+Import all projects, except for `*.tests` and `uiscript-examples` into an Eclipse workspace.
 After (clean-)building, there will likely be errors in the file `TypeExtensionsImpl.xtend` in the project `com.dslconsultancy.uiscript.core` under `src/com.dslconsultancy.uiscript.extensions.impl`.
 (This seems to be due to a form of "deep cyclicity" that manages to stump Xtext/Xtend's build organisation.)
 "Touch" that file by doing either of the following:
