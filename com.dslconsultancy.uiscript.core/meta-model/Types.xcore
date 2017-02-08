@@ -35,7 +35,7 @@ class BuiltinTypeLiteral extends TypeLiteral {
 
 enum BuiltinTypes {
 	string as "String"
-	boolean as "Boolean" = 1
+	^boolean as "Boolean" = 1
 	integer as "Integer" = 2
 	url as "URL" = 3
 	text as "Text" = 4
