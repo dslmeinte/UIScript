@@ -245,15 +245,12 @@ ViewableCallSite returns ViewableCallSite:	// (synthetic type)
 	// validation: arguments are checked against viewable.parameters for unmapped and duplicately-mapped parameters		[√]
 
 Element returns Element:
-	  Binding									// value elements
-	| ComponentInvocation						// embedding
+	  ComponentInvocation						// embedding
 	// structural elements:
-	| BlockElement | ListElement | WhenElement
+	| WhenElement
 	// other elements:
 	| ButtonElement
-	| ImageElement
 	| InputElement
-	| ObserveElement
 	;
 
 
@@ -331,29 +328,6 @@ MethodDefinition returns MethodDefinition:
  * +----------+
  */
 
-Binding returns elements::Binding:
-	'bind' '(' bindSite=Expression ')'
-	;
-	/*
-	 * validation: bindSite.type must be observable		[√]
-	 * semantics: indicates a reactive expression
-	 */ 
-
-BlockElement returns elements::BlockElement:
-	'block' '(' ( 
-		  ('onClick' '=' onClick=Expression)?
-		& ('class' '=' cssClass=STRING)?
-		& ('bodyClass' '=' bodyCssClass=STRING)?
-		& ('style' '=' style=STRING)?
-		& ('header' '=' header=ElementBody)?
-		& ('headerClass' '=' headerCssClass=STRING)?
-		& (noCss?='noCss')?
-	) ')' body=ElementBody
-	;
-	/*
-	 * validation: onClick.type == Callback				[√] 
-	 */
-
 ButtonElement returns elements::ButtonElement:
 	'button' '(' (
 		  ( 'text' '=' text=STRING ) 
@@ -376,18 +350,6 @@ ComponentInvocation returns elements::ComponentInvocation:
 	 * workaround: prefixed with 'embed' to avoid parsing clash
 	 */
 	// TODO  considering combining the ComponentInvocation and Binding rules by creating a method call operator in the expressions language (&c.) - and get rid of 'embed'
-
-ImageElement returns elements::ImageElement:
-	'image' '(' (
-		  observed?='observe'? sourceUrl=Expression 
-		& ('width' '=' width=Expression)?
-		& ('height' '=' height=Expression)?
-	) ')'
-	;
-	/* 
-	 * validation: source.type.stringTyped				[√]
-	 * width and height should be Integer typed.		[ ]
-	 */
 
 InputElement returns elements::InputElement:
 	'input'
@@ -434,20 +396,6 @@ StructureOption returns elements::StructureOption:
 	 * 		2-  displayFunction must refer a function of signature
 	 * 				(bindSite.type.listItemType) -> String (i.e., a closure)	[√]
 	 */
-
-ListElement returns elements::ListElement:
-	'list' '('
-		'(' indexVariable=IteratorVariable '->' valueVariable=IteratorVariable ')' 'in'
-		listExpression=Expression
-	')' body=ElementBody
-	;
-	// validation: listExpression.type.arrayTyped		[√]
-	// TODO  add element that serves as a deletion mechanism
-
-ObserveElement returns elements::ObserveElement:
-	'observe' observeExpr=Expression statementBlock=StatementBlock
-	;
-	// TODO  document precise semantics (and how is it different from a Binding e.g.)
 
 WhenElement returns elements::WhenElement:
 	'when' '(' condition=Expression ')' body=ElementBody

@@ -4,32 +4,13 @@ package com.dslconsultancy.uiscript.elements
 
 import com.dslconsultancy.uiscript.core.Element
 import com.dslconsultancy.uiscript.core.Expression
-import com.dslconsultancy.uiscript.core.IteratorVariable
 import com.dslconsultancy.uiscript.core.Method
-import com.dslconsultancy.uiscript.core.StatementBlock
 import com.dslconsultancy.uiscript.core.ViewableCallSite
 
 
 /*
  * Definitions of all built-in elements.
  */
-
-
-class Binding extends Element {
-	contains Expression bindSite
-}
-
-
-class BlockElement extends Element {
-	contains Expression onClick
-	String cssClass
-	String bodyCssClass
-	String style
-	contains ElementBody header
-	String headerCssClass
-	boolean noCss
-	contains ElementBody body
-}
 
 
 class ButtonElement extends Element {
@@ -40,14 +21,6 @@ class ButtonElement extends Element {
 
 
 class ComponentInvocation extends Element, ViewableCallSite {}
-
-
-class ImageElement extends Element {
-	boolean observed
-	contains Expression sourceUrl
-	contains Expression width
-	contains Expression height
-}
 
 
 class InputElement extends Element {
@@ -69,20 +42,6 @@ class RadioOption {
 class StructureOption {
 	contains Expression sourceExpr
 	refers Method displayFunction
-}
-
-
-class ListElement extends Element {
-	contains IteratorVariable indexVariable
-	contains IteratorVariable valueVariable
-	contains Expression listExpression
-	contains ElementBody body
-}
-
-
-class ObserveElement extends Element {
-	contains Expression observeExpr
-	contains StatementBlock statementBlock
 }
 
 

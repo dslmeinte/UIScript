@@ -4,7 +4,6 @@ import com.dslconsultancy.uiscript.core.DefinedViewable
 import com.dslconsultancy.uiscript.core.MethodDefinition
 import com.dslconsultancy.uiscript.core.Statement
 import com.dslconsultancy.uiscript.core.ViewableCallSite
-import com.dslconsultancy.uiscript.elements.ListElement
 import com.dslconsultancy.uiscript.expressions.BuiltinFunctionExpression
 import com.dslconsultancy.uiscript.expressions.EnumerationLiteralExpression
 import com.dslconsultancy.uiscript.expressions.FeatureAccessExpression
@@ -111,16 +110,6 @@ class UIScriptScopeProvider extends AbstractUIScriptScopeProvider {
 
 	def IScope scope_FeatureAssignment_feature(StructureCreationExpression it, EReference eRef) {
 		scopeFor(it.structure.features)
-	}
-
-	def IScope scope_Referable(ListElement it, EReference eRef) {
-		val listVariables = newArrayList(it.indexVariable, it.valueVariable)
-		val containingListElement = eContainer.containerHaving(typeof(ListElement))
-		if( containingListElement !== null ) {
-			scopeFor(listVariables, scope_Referable(containingListElement, eRef))
-		} else {
-			scopeFor(listVariables, scope_Referable(containerHaving(typeof(DefinedViewable)), eRef))
-		}
 	}
 
 	def IScope scope_Referable(ForStatement it, EReference eRef) {

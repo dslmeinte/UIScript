@@ -214,7 +214,7 @@ class TypeCalculatorImpl implements TypeCalculator {
 		switch it {
 			Value:			if( declaration.declaredType === null ) { declaration.valueExpr?.type_ } else { declaration.declaredType }	// (returns null in case of parse/validation error)
 			Parameter:		it.type
-			IteratorVariable:	<TypeLiteral>ifIndexVarThenElse( [INTEGER.createBuiltinTypeLiteral], [valueVariableType] )
+			IteratorVariable:	null	// FIXME
 			Method:			it.returnType
 			default:		{
 								logProblem('''encountered «IF eIsProxy»unresolved proxy of «ENDIF»«eClass.name» in dispatch to TypeCalculator#refType'''.toString)

@@ -57,7 +57,7 @@ class ExpressionExtensionsImpl implements ExpressionExtensions {
 
 	def private dispatch isLValue_(Value it)				{ variable }
 	def private dispatch isLValue_(Parameter it)			{ !(type.callback || type.voidTyped) }
-	def private dispatch isLValue_(IteratorVariable it) 		{ ifIndexVarThenElse([false], [valueVariableType.structureTyped]) as boolean }
+	def private dispatch isLValue_(IteratorVariable it) 	{ false }
 	def private dispatch isLValue_(Method it)				{ false }
 
 	// sentinel:

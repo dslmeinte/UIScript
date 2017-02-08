@@ -3,15 +3,11 @@ package com.dslconsultancy.uiscript.xtext.validation
 import com.dslconsultancy.uiscript.core.Argument
 import com.dslconsultancy.uiscript.core.CorePackage
 import com.dslconsultancy.uiscript.core.Method
-import com.dslconsultancy.uiscript.elements.Binding
-import com.dslconsultancy.uiscript.elements.BlockElement
 import com.dslconsultancy.uiscript.elements.ButtonElement
 import com.dslconsultancy.uiscript.elements.ComponentInvocation
 import com.dslconsultancy.uiscript.elements.ElementBody
 import com.dslconsultancy.uiscript.elements.ElementsPackage
-import com.dslconsultancy.uiscript.elements.ImageElement
 import com.dslconsultancy.uiscript.elements.InputElement
-import com.dslconsultancy.uiscript.elements.ListElement
 import com.dslconsultancy.uiscript.elements.StructureOption
 import com.dslconsultancy.uiscript.elements.WhenElement
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
@@ -72,30 +68,9 @@ class ElementValidator extends ValidatorSupport {
 	}
 
 	@Check
-	def void check_bind_site_is_primitive_typed(Binding it) {
-		if( !bindSite.isObservable ) {
-			error("the bind site of a binding must be observable", elementsPackage.binding_BindSite)
-		}
-	}
-
-	@Check
 	def void check_button_onClick_is_callback(ButtonElement it) {
 		if( !action.type.callback ) {
 			error("onClick must be a Callback", elementsPackage.buttonElement_Action)
-		}
-	}
-
-	@Check
-	def void check_block_onClick_is_callback(BlockElement it) {
-		if( onClick !== null && !onClick.type.callback ) {
-			error("onClick must be a Callback", elementsPackage.blockElement_OnClick)
-		}
-	}
-
-	@Check
-	def void check_list_element_works_on_list_expression(ListElement it) {
-		if( !listExpression.type.listTyped ) {
-			error('''list expression must be list-typed, but is «listExpression.type.toLiteral»'''.toString, elementsPackage.listElement_ListExpression)
 		}
 	}
 
@@ -192,19 +167,6 @@ class ElementValidator extends ValidatorSupport {
 	def void check_when_condition_is_boolean_typed(WhenElement it) {
 		if( !condition.type.booleanTyped ) {
 			error("condition of when-element must be boolean-typed", elementsPackage.whenElement_Condition)
-		}
-	}
-
-	@Check
-	def void check_image_arguments(ImageElement it) {
-		if( !sourceUrl.type.stringTyped ) {
-			error("source of image-element must be string-typed", elementsPackage.imageElement_SourceUrl)
-		}
-		if( !height.type.integerTyped) {
-			error("height of image-element must be integer-typed", elementsPackage.imageElement_Height)
-		}
-		if( !width.type.integerTyped) {
-			error("width of image-element must be integer-typed", elementsPackage.imageElement_Width)
 		}
 	}
 
