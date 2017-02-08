@@ -13,6 +13,5 @@ screen screen1() {
 		todos: [Todo] := []
 	}
 
-
 }
 
