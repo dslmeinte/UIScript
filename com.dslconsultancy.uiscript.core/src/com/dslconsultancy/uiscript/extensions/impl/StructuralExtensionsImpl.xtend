@@ -1,13 +1,9 @@
 package com.dslconsultancy.uiscript.extensions.impl
 
-import com.dslconsultancy.uiscript.core.Argument
 import com.dslconsultancy.uiscript.core.MethodDefinition
 import com.dslconsultancy.uiscript.core.Parameter
 import com.dslconsultancy.uiscript.core.Parametrisable
-import com.dslconsultancy.uiscript.core.Viewable
-import com.dslconsultancy.uiscript.core.ViewableCallSite
 import com.dslconsultancy.uiscript.extensions.StructuralExtensions
-import com.dslconsultancy.uiscript.extensions.ViewableExtensions
 import com.dslconsultancy.uiscript.structural.UiModule
 import com.dslconsultancy.uiscript.util.XtextUtil
 import com.google.inject.Inject
@@ -17,7 +13,6 @@ import org.eclipse.emf.ecore.EObject
 @Singleton
 class StructuralExtensionsImpl implements StructuralExtensions {
 
-	@Inject extension ViewableExtensions
 	@Inject extension XtextUtil
 
 
@@ -25,16 +20,8 @@ class StructuralExtensionsImpl implements StructuralExtensions {
 		eResource.fileName
 	}
 	
-	override viewables(UiModule it) {
-		parametrisables.filter(typeof(Viewable))
-	}
-
 	override topLevelMethods(UiModule it) {
 		parametrisables.filter(typeof(MethodDefinition)).map[method]
-	}
-
-	override firstScreen(UiModule it) {
-		viewables.findFirst[screen]
 	}
 
 	override containingModule(EObject it) {
@@ -55,10 +42,6 @@ class StructuralExtensionsImpl implements StructuralExtensions {
 
 	override parameters(Parametrisable it) {
 		parameterList.parameters as Iterable<Parameter>
-	}
-
-	override arguments(ViewableCallSite it) {
-		argumentList.arguments as Iterable<Argument>
 	}
 
 }

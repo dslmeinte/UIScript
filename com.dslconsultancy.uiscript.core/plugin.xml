@@ -47,14 +47,6 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Elements -->
-      <package
-            uri="http://www.dslconsultancy.com/uicript/elements"
-            class="com.dslconsultancy.uiscript.elements.ElementsPackage"
-            genModel="meta-model/Elements.xcore"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Core -->
       <package
             uri="http://www.dslconsultancy.com/uicript/core"
@@ -68,6 +60,14 @@
             uri="http://www.dslconsultancy.com/uicript/structural"
             class="com.dslconsultancy.uiscript.structural.StructuralPackage"
             genModel="meta-model/Structural.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Components -->
+      <package
+            uri="http://www.dslconsultancy.com/uicript/components"
+            class="com.dslconsultancy.uiscript.components.ComponentsPackage"
+            genModel="meta-model/Components.xcore"/>
    </extension>
 
 </plugin>

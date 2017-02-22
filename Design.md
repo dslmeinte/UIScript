@@ -86,7 +86,7 @@ A component looks syntactically as follows:
 component TodoComponent(todos: Todo[]) {
 
 	state {
-		newTodo: Todo <- new Todo
+		newTodo: Todo := new Todo
 		todosCompleted == todos.filter[completed].count
 		isNewTodoAddable == !newTodo.task.empty
 	}
@@ -164,9 +164,9 @@ By default, a nothing value bubbles up through the evaluation of any expression 
 This avoids the usual litany of comparisons with `undefined`, `null`, etc., as well as the usual problems with truthy vs. falsy values that plague JavaScript.
 
 
-### The "implies" operator
+### The "when" operator
 
-The "implies" operator embodies the idea of "**if** this **then** something (**else** *nothing*)".
+The "when" operator embodies the idea of "**if** this **then** something (**else** *nothing*)".
 
 Suppose you want to visualise a button only if a certain condition `fooBarred` equals `true`.
 In UIScript you express this (within the body of a component) as follows:
@@ -175,7 +175,7 @@ In UIScript you express this (within the body of a component) as follows:
 fooBarred -> <button .{warning explosive}> { "Proceed with caution?" }
 ```
 
-You could view the "implies" operator as a ternary **if**-operator that's been made binary again.
+You could view the "when" operator as a ternary **if**-operator that's been made binary again.
 
 
 ### The "tagging" operator
@@ -210,4 +210,7 @@ Not yet specification for/(much) thought given to:
 * The exact nature of the services' declarations.
 * Consider making the tagging operator implicit: any expression in the CSS class spec that evaluates to `true`, results in a CSS class selector with the name of the last "fragment" in that expression.
 * Consider adding explicit componentn syntax for dependency injection that maps to `<Provider...>`.
+* Consider adding "shorthand syntax" for passing arguments, e.g.: `<TodoComponent todos> {}` for `<TodoComponent todos: todos> {}`.
+	The parameter name `todos` is then derived from the last segment of the expression `todos` which happens to be a reference to the state value `todos`.
+	Consider generalizing for such *name emitting expressions*.
 

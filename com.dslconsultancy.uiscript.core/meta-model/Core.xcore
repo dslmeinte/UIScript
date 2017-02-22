@@ -45,40 +45,11 @@ class IteratorVariable extends Referable {}
  * +-----------+
  */
 
-abstract class Viewable extends Parametrisable, Named {
-	ViewableTypes ^type
-}
-
-enum ViewableTypes {
-	screen
-	component = 1
-}
-
-
-class DefinedViewable extends Viewable {
-	contains ValuesBlock valuesBlock
-	contains ViewableDefinition[] definitions
-}
-
 class ValuesBlock {
 	contains ValueDeclaration[] declarations
 }
 
 abstract class ViewableDefinition {}
-
-
-class ManualViewable extends Viewable {
-	String namespace
-}
-
-
-class ViewableCallSite {
-	refers Viewable viewable
-	contains ArgumentList argumentList
-}
-
-
-class Element extends ViewableDefinition {}
 
 
 
@@ -90,7 +61,7 @@ class Element extends ViewableDefinition {}
 
 abstract class AbstractValueDeclaration {
 	contains Value value
-	contains TypeLiteral declaredType
+	contains TypeLiteral declaredType	// optional (inferred)
 	contains Expression valueExpr
 }
 

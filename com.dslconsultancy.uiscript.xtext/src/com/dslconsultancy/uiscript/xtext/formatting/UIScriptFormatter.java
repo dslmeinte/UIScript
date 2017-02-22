@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.Pair;
  * 
  * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
  */
+@SuppressWarnings("restriction")
 public class UIScriptFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override

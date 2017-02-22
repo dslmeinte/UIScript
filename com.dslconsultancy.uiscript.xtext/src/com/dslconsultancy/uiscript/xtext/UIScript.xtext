@@ -2,7 +2,6 @@ grammar com.dslconsultancy.uiscript.xtext.UIScript with org.eclipse.xtext.common
 
 import "http://www.dslconsultancy.com/uicript/core"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "http://www.dslconsultancy.com/uicript/elements" as elements
 import "http://www.dslconsultancy.com/uicript/expressions" as expr
 import "http://www.dslconsultancy.com/uicript/expressionsAux" as exprAux
 import "http://www.dslconsultancy.com/uicript/services" as services
@@ -163,7 +162,7 @@ SyntheticTypeLiteral returns types::SyntheticTypeLiteral:
  */
 
 Parametrisable returns Parametrisable:
-	DefinedViewable | ManualViewable | MethodDefinition;
+	MethodDefinition;	// | ComponentDefinition
 
 Parameter returns Parameter:
 	name=ID ':' type=TypeLiteral
@@ -190,35 +189,12 @@ ArgumentList returns ArgumentList:
 	;
 
 
+
 /*
- * +-----------+
- * | viewables |
- * +-----------+
+ * +--------+
+ * | values |
+ * +--------+
  */
-
-Viewable returns Viewable:
-	DefinedViewable | ManualViewable
-	;
-	// derived feature: =screen(Viewable it) ::= type == _screen_	[√]
-	// pulled-up features: type, name, parameterList
-
-enum ViewableTypes returns ViewableTypes:
-	screen | component
-	;
-
-DefinedViewable returns DefinedViewable:
-	type=ViewableTypes name=ID parameterList=ParameterList '{'
-		valuesBlock=ValuesBlock?			// (feature's value may be null)
-		definitions+=ViewableDefinition*	// (feature's value is always non-null)
-	'}'
-	;
-	// validation: warning in case of 0 elements					[√]
-	// derived feature: =screen(Viewable it) ::= type == _screen_	[√]
-	/*
-	 * TODO  consider making a modal a separate viewable type
-	 * The idea is that a modal should often be able to act as a confirm or an obligatory
-	 * choice between a few actions in a way that's quite functional - e.g., persistent dialog box.
-	 */
 
 ValuesBlock returns ValuesBlock:
 	{ValuesBlock}
@@ -226,39 +202,6 @@ ValuesBlock returns ValuesBlock:
 		declarations+=ValueDeclaration*
 	'}'
 	;
-
-ViewableDefinition returns ViewableDefinition:
-	Element | MethodDefinition
-	;
-
-ManualViewable returns ManualViewable:
-	'manual' type=ViewableTypes name=ID parameterList=ParameterList 'in' namespace=QualifiedName
-	;
-
-QualifiedName:
-	ID ('.' ID)*
-	;
-
-ViewableCallSite returns ViewableCallSite:	// (synthetic type)
-	GotoScreenStatement | ComponentInvocation
-	;
-	// validation: arguments are checked against viewable.parameters for unmapped and duplicately-mapped parameters		[√]
-
-Element returns Element:
-	  ComponentInvocation						// embedding
-	// structural elements:
-	| WhenElement
-	// other elements:
-	| ButtonElement
-	| InputElement
-	;
-
-
-/*
- * +--------+
- * | values |
- * +--------+
- */
 
 Value returns Value:
 	name=ID
@@ -323,93 +266,6 @@ MethodDefinition returns MethodDefinition:
 
 
 /*
- * +----------+
- * | elements |
- * +----------+
- */
-
-ButtonElement returns elements::ButtonElement:
-	'button' '(' (
-		  ( 'text' '=' text=STRING ) 
-		& ( 'onClick' '=' action=Expression ) 
-		& ( 'class' '=' cssClass=STRING )? 
-	) ')'
-	;
-	/*
-	 * validation: action.type == Callback				[√]
-	 * design decision: `action` needs to be an Expression because we want to be able to refer to passed callbacks (and such)
-	 */
-
-ComponentInvocation returns elements::ComponentInvocation:
-	'embed' viewable=[Viewable] argumentList=ArgumentList
-	;
-	/*
-	 * validation:
-	 * 		1-  viewable is a component																		[√]
-	 * 		2-  all parameters of the viewable are covered by the arguments (and not more than once)		[√]
-	 * workaround: prefixed with 'embed' to avoid parsing clash
-	 */
-	// TODO  considering combining the ComponentInvocation and Binding rules by creating a method call operator in the expressions language (&c.) - and get rid of 'embed'
-
-InputElement returns elements::InputElement:
-	'input'
-	'('
-		bindSite=Expression
-		(
-			  ( 'hint' '=' hint=STRING )?
-			& ( 'min' '=' minValue=Expression )?
-			& ( 'max' '=' maxValue=Expression )?
-			& ( radioOption=RadioOption )?
-			& ( 'onChange' '=' onChange=Expression )?	// event is fired when value is changed and input field looses focus
-			& ( 'onSubmit' '=' onSubmit=Expression )?	// event is fired when Enter is pressed and input is valid
-			& ( structureOption=StructureOption )?
-		)
-	')'
-	;
-	/*
-	 * validation:
-	 * 		1-  bindSite must be a proper target/valid left-hand side			[√]
-	 * 		2-	bindSite must not be a callback- or void-typed 					[√]
-	 * 		x-  warning given for types on which hint is not supported			[√]
-	 * 		3-  min/max only allowed if bindSite is numerically-typed			[√]
-	 * 		4-	min&max must be numerically-typed								[√]
-	 * 		5-  radioOption can only be given if bindSite is boolean-typed		[√]
-	 * 		6-  onChange.type == Callback										[√]
-	 * 		y-  warning given for unsupported onChange option					[√]
-	 * 		7-  structure option required <==> input is structure-typed 		[√]
-	 * 		8-  warning given for (potentially) uninitialized enum fields		[ ]		TODO  OR fix FIXME in JS framework/widgets code
-	 * 		9-  onSumbit.type == Callback										[√]
-	 */
-	// semantics: corresponds to an HTML input element, with the hint being given for (at least) textually-typed fields
-	// TODO  add length option (which is supported by some of the widgets)?
-
-RadioOption returns elements::RadioOption:
-	'radio' '=' '{' true=STRING '/' false=STRING '}'
-	;
-
-StructureOption returns elements::StructureOption:
-	'source' '=' '{' sourceExpr=Expression '->' displayFunction=[Method] '}'
-	;
-	/*
-	 * validation:
-	 * 		1-  source must be list-typed with structure type as item type		[√]
-	 * 		2-  displayFunction must refer a function of signature
-	 * 				(bindSite.type.listItemType) -> String (i.e., a closure)	[√]
-	 */
-
-WhenElement returns elements::WhenElement:
-	'when' '(' condition=Expression ')' body=ElementBody
-	;
-	// validation: condition.type.booleanTyped			[√]
-
-ElementBody returns elements::ElementBody:
-	{elements::ElementBody}
-	'{' elements+=Element* '}'
-	;
-	// validation: warning if elements.empty			[√]
-
-
-/*
  * +------------+
  * | statements |
  * +------------+
@@ -433,13 +289,13 @@ StatementBlock returns StatementBlock:
 
 Statement returns Statement:	// (synthetic type)
 	  NonExitingStatement
-	| ExitingStatement
+//	| ExitingStatement
 	;
 	// A Statement is always contained in a StatementBlock.
 
-ExitingStatement returns statements::ExitingStatement:
-	  GotoScreenStatement
-	;
+//ExitingStatement returns statements::ExitingStatement:
+//	  GotoScreenStatement
+//	;
 
 NonExitingStatement returns statements::NonExitingStatement:
 	  AssignmentOrExpressionStatement
@@ -494,9 +350,9 @@ ListRemoveStatement returns statements::ListRemoveStatement:
 
 
 
-GotoScreenStatement returns statements::GotoScreenStatement:
-	( 'goto' | 'goto-screen' ) viewable=[Viewable] => argumentList=ArgumentList
-	;
+//GotoScreenStatement returns statements::GotoScreenStatement:
+//	( 'goto' | 'goto-screen' ) viewable=[Viewable] => argumentList=ArgumentList
+//	;
 	// scoping: viewable == all(Viewable)-in-this-resource.filter[screen]	[√]
 	/*
 	 * Call syntax is now aligned with declaration syntax because '(..)' are required.

@@ -12,7 +12,6 @@ import org.eclipse.xtext.validation.ComposedChecks
  * @author Meinte Boersma
  */
 @ComposedChecks(validators=#[
-	typeof(ElementValidator),
 	typeof(ExpressionValidator),
 	typeof(ServiceValidator),
 	typeof(StatementValidator),

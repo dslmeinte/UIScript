@@ -31,8 +31,8 @@ Workflow {
 		language = StandardLanguage {
 			name = "com.dslconsultancy.uiscript.xtext.UIScript"
 			fileExtensions = "uiscript"
+			referencedResource = "platform:/resource/com.dslconsultancy.uiscript.core/meta-model/Components.xcore"
 			referencedResource = "platform:/resource/com.dslconsultancy.uiscript.core/meta-model/Core.xcore"
-			referencedResource = "platform:/resource/com.dslconsultancy.uiscript.core/meta-model/Elements.xcore"
 			referencedResource = "platform:/resource/com.dslconsultancy.uiscript.core/meta-model/Expressions.xcore"
 			referencedResource = "platform:/resource/com.dslconsultancy.uiscript.core/meta-model/ExpressionsAux.xcore"
 			referencedResource = "platform:/resource/com.dslconsultancy.uiscript.core/meta-model/Services.xcore"

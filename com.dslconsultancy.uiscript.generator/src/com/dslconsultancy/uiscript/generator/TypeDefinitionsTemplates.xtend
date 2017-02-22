@@ -1,10 +1,9 @@
-package com.dslconsultancy.uiscript.xtext.generator.tsx
+package com.dslconsultancy.uiscript.generator
 
 import com.dslconsultancy.uiscript.types.Enumeration
 import com.dslconsultancy.uiscript.types.EnumerationLiteral
 import com.dslconsultancy.uiscript.types.Feature
 import com.dslconsultancy.uiscript.types.Structure
-import com.dslconsultancy.uiscript.xtext.generator.tsx.TypeLiteralTemplates
 import com.google.inject.Inject
 
 class TypeDefinitionsTemplates {

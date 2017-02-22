@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UIScript-generator
+Bundle-SymbolicName: com.dslconsultancy.uiscript.generator
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: DSLConsultancy.com
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ com.dslconsultancy.uiscript.core;bundle-version="1.0.0",
+ com.google.inject;bundle-version="3.0.0",
+ org.eclipse.emf;bundle-version="2.6.0",
+ org.eclipse.emf.ecore;bundle-version="2.12.0"
+Export-Package: com.dslconsultancy.uiscript.generator
+

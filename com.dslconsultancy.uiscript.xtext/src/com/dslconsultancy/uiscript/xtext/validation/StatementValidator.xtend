@@ -1,12 +1,9 @@
 package com.dslconsultancy.uiscript.xtext.validation
 
-import com.dslconsultancy.uiscript.core.CorePackage
 import com.dslconsultancy.uiscript.core.StatementBlock
-import com.dslconsultancy.uiscript.core.ViewableCallSite
 import com.dslconsultancy.uiscript.expressions.FeatureAccessExpression
 import com.dslconsultancy.uiscript.expressions.ReferenceExpression
 import com.dslconsultancy.uiscript.extensions.ExpressionExtensions
-import com.dslconsultancy.uiscript.extensions.StructuralExtensions
 import com.dslconsultancy.uiscript.extensions.TypeCalculator
 import com.dslconsultancy.uiscript.extensions.TypeExtensions
 import com.dslconsultancy.uiscript.statements.AssignmentOperator
@@ -25,12 +22,10 @@ class StatementValidator extends ValidatorSupport {
 
 	@Inject extension TypeCalculator
 	@Inject extension TypeExtensions
-	@Inject extension StructuralExtensions
 	@Inject extension ExpressionExtensions
 
 	@Inject extension XtextUtil
 
-	val corePackage = CorePackage.eINSTANCE
 	val statementsPackage = StatementsPackage.eINSTANCE
 
 
@@ -95,21 +90,6 @@ class StatementValidator extends ValidatorSupport {
 	def void check_condition_is_a_Boolean_expression(IfStatement it) {
 		if( !condition.type.booleanTyped ) {
 			error("condition of an if-statement must be boolean-typed", statementsPackage.ifStatement_Condition)
-		}
-	}
-
-	@Check
-	def void check_parameter_argument_mapping(ViewableCallSite it) {
-		val unmappedParameters =		viewable.parameters.filter[ p | it.arguments.filter[ a | a.parameter == p ].size == 0 ]
-		val doublyMappedParameters =	viewable.parameters.filter[ p | it.arguments.filter[ a | a.parameter == p ].size > 1 ]
-		if( !unmappedParameters.empty ) {
-			error("the following parameters do not receive arguments: " + unmappedParameters.map[name].join(', '), corePackage.viewableCallSite_ArgumentList)
-		}
-		for( parameter : doublyMappedParameters ) {
-			val duplicateArguments = it.arguments.filter[ a | a.parameter == parameter ]
-			for( argument : duplicateArguments ) {
-				argument.error('''duplicate argument for parameter "«parameter.name»"''', this)
-			}
 		}
 	}
 

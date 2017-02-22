@@ -7,11 +7,35 @@ structure Todo {
 }
 
 
-screen screen1() {
+component mainScreen() {
 
-	values {
-		todos: [Todo] := []
+	state {
+		todos: Todo* := {}
 	}
+
+	<TodoComponent todos: todos> {}
+
+}
+
+
+component TodoComponent(todos: Todo[]) {
+
+    state {
+        newTodo: Todo := new Todo
+        todosCompleted == todos.filter[completed].count
+        isNewTodoAddable == !newTodo.task.empty
+    }
+
+    actions {
+        addTodo: { todos += newTodo, newTodo <- new Todo }
+    }
+
+    // body starts here:
+    <div.todoComponent> {
+        todos.map[
+            // ...
+        ]
+    }
 
 }
 

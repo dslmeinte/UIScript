@@ -1,7 +1,6 @@
-package com.dslconsultancy.uiscript.xtext.generator.tsx
+package com.dslconsultancy.uiscript.generator
 
-import com.dslconsultancy.uiscript.core.DefinedViewable
-import com.dslconsultancy.uiscript.core.ManualViewable
+import com.dslconsultancy.uiscript.components.ComponentDefinition
 import com.dslconsultancy.uiscript.core.MethodDefinition
 import com.dslconsultancy.uiscript.core.ValueSpecificationTypes
 import com.google.inject.Inject
@@ -10,14 +9,13 @@ class ParametrisablesTemplates {
 
 	@Inject extension TypeLiteralTemplates
 
-	def dispatch asTsx(DefinedViewable it) {
+	def dispatch asTsx(ComponentDefinition it) {
 		'''
-		/** Defined viewable of type «type.literal». */
 		export function «name»() {
 
 			class Properties_«name» {
 				values: {
-					«FOR valueDeclaration : valuesBlock.declarations.filter[valueSpecificationType === ValueSpecificationTypes.INITIALIZATION]»
+					«FOR valueDeclaration : stateDeclarations.filter[valueSpecificationType === ValueSpecificationTypes.INITIALIZATION]»
 						«valueDeclaration.value.name»: «valueDeclaration.declaredType.typeAsTs»;
 					«ENDFOR»
 				};
@@ -40,15 +38,6 @@ class ParametrisablesTemplates {
 	def dispatch asTsx(MethodDefinition it) {
 		'''
 		export function «method.name»() {	// defined method
-			
-		}
-		'''
-	}
-
-
-	def dispatch asTsx(ManualViewable it) {
-		'''
-		export function «name»() {	// manual viewable of type «type.literal»
 			
 		}
 		'''

@@ -2,12 +2,9 @@ package com.dslconsultancy.uiscript.extensions;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.dslconsultancy.uiscript.core.Argument;
 import com.dslconsultancy.uiscript.core.Method;
 import com.dslconsultancy.uiscript.core.Parameter;
 import com.dslconsultancy.uiscript.core.Parametrisable;
-import com.dslconsultancy.uiscript.core.Viewable;
-import com.dslconsultancy.uiscript.core.ViewableCallSite;
 import com.dslconsultancy.uiscript.extensions.impl.StructuralExtensionsImpl;
 import com.dslconsultancy.uiscript.structural.UiModule;
 import com.google.inject.ImplementedBy;
@@ -21,19 +18,9 @@ public interface StructuralExtensions {
 	String name(UiModule it);
 
 	/**
-	 * @return All the {@link Viewable}s of the module.
-	 */
-	Iterable<Viewable> viewables(UiModule it);
-
-	/**
 	 * @return All the {@link Method methods} of the module.
 	 */
 	Iterable<Method> topLevelMethods(UiModule it);
-
-	/**
-	 * @return The first actual screen of this module.
-	 */
-	Viewable firstScreen(UiModule it);
 
 	/**
 	 * @return The containing {@link UiModule}.
@@ -51,7 +38,5 @@ public interface StructuralExtensions {
 	 * choice.
 	 */
 	Iterable<Parameter> parameters(Parametrisable it);
-
-	Iterable<Argument> arguments(ViewableCallSite it);
 
 }

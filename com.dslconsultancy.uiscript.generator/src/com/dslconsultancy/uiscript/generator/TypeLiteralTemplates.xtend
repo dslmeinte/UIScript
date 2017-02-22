@@ -1,4 +1,4 @@
-package com.dslconsultancy.uiscript.xtext.generator.tsx
+package com.dslconsultancy.uiscript.generator
 
 import com.dslconsultancy.uiscript.types.BuiltinTypeLiteral
 import com.dslconsultancy.uiscript.types.BuiltinTypes

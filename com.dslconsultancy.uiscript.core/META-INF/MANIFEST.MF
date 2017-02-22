@@ -14,12 +14,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext;bundle-version="2.5.3"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: com.dslconsultancy.uiscript.core,
+Export-Package: com.dslconsultancy.uiscript.components,
+ com.dslconsultancy.uiscript.components.impl,
+ com.dslconsultancy.uiscript.components.util,
+ com.dslconsultancy.uiscript.core,
  com.dslconsultancy.uiscript.core.impl,
  com.dslconsultancy.uiscript.core.util,
- com.dslconsultancy.uiscript.elements,
- com.dslconsultancy.uiscript.elements.impl,
- com.dslconsultancy.uiscript.elements.util,
  com.dslconsultancy.uiscript.expressions,
  com.dslconsultancy.uiscript.expressions.aux,
  com.dslconsultancy.uiscript.expressions.aux.impl,

@@ -162,3 +162,14 @@ abstract class BinaryOperatorExpression extends Expression {
 	contains Expression rightOperand
 }
 
+
+class TaggingExpression extends Expression {
+	contains Expression expr	
+}
+
+
+class WhenExpression extends Expression {
+	contains Expression guard
+	contains Expression impliedResult
+}
+

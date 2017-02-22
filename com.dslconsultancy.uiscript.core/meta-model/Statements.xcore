@@ -7,7 +7,6 @@ import com.dslconsultancy.uiscript.core.Expression
 import com.dslconsultancy.uiscript.core.IteratorVariable
 import com.dslconsultancy.uiscript.core.Statement
 import com.dslconsultancy.uiscript.core.StatementBlock
-import com.dslconsultancy.uiscript.core.ViewableCallSite
 import com.dslconsultancy.uiscript.types.Feature
 
 
@@ -42,7 +41,7 @@ class ForStatement extends NonExitingStatement {
 }
 
 
-class GotoScreenStatement extends ExitingStatement, ViewableCallSite {}
+class GotoScreenStatement extends ExitingStatement {}
 
 
 class IfStatement extends NonExitingStatement {
