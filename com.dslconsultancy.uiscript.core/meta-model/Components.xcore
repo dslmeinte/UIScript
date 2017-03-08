@@ -2,42 +2,54 @@
 @GenModel(forceOverwrite="true", modelName="UIComponents", updateClasspath="false", complianceLevel="5.0")
 package com.dslconsultancy.uiscript.components
 
+import com.dslconsultancy.uiscript.core.Argument
 import com.dslconsultancy.uiscript.core.Expression
 import com.dslconsultancy.uiscript.core.Named
 import com.dslconsultancy.uiscript.core.Parametrisable
 import com.dslconsultancy.uiscript.core.ValueDeclaration
-import com.dslconsultancy.uiscript.expressions.TaggingExpression
 
 
 class ComponentDefinition extends Named, Parametrisable {
 	contains ValueDeclaration[] stateDeclarations
 	// TODO  actions
-	contains ComponentInvocation contents
-}
-
-
-class ComponentInvocation extends Expression {
-	String tagName
-		// or:
-	refers ComponentDefinition component
-
-	// CSS class specification:
-	String[] atomicClassNames
-	contains TaggingExpression[] tags
-
-	String idSpec							// [0..1]
-	contains DictionaryItem[] attributes	// [0..*]
-	contains Expression contents			// [1]
+	contains AbstractElement contents
 }
 /*
  * Validation:
- * 	1. Either tagName is non-null (and a member of a supported set of React primities), or component is non-null.
- * 	2. contents evaluates to a (one) component invocation.
+ * 	1. contents evaluates to a (one) component invocation.
  */
 
 
-class DictionaryItem {
-	String key	// TODO  or make this potentially dynamic?
+abstract class AbstractElement extends Expression {
+	contains CssClassSpecification cssClassSpecification
+	String idSpec							// [0..1]
+	contains Expression contents			// [1]
+}
+
+
+class ComponentInvocation extends AbstractElement {
+	refers ComponentDefinition component
+	contains Argument[] attributes
+}
+
+
+class CssClassSpecification {
+	String[] atomicClassNames
+	contains Expression[] tags
+}
+
+
+class HtmlElement extends AbstractElement {
+	ReactTag reactTag
+	contains Attribute[] attributes	// [0..*]
+}
+
+class Attribute {
+	String key					// [0..1]
 	contains Expression value
+}
+
+enum ReactTag {
+	div, span
 }
 

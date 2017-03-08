@@ -10,31 +10,33 @@ structure Todo {
 component mainScreen() {
 
 	state {
-		todos: Todo* := {}
+		todos: [Todo] := []
 	}
 
-	<TodoComponent todos: todos> {}
+	<TodoComponent :todos /> {}
 
 }
 
 
-component TodoComponent(todos: Todo[]) {
+component TodoComponent(todos: [Todo] foo: String) {
 
     state {
-        newTodo: Todo := new Todo
-        todosCompleted == todos.filter[completed].count
+        newTodo: Todo := new Todo()
+//        todosCompleted == todos.filter[completed].count
         isNewTodoAddable == !newTodo.task.empty
     }
 
     actions {
-        addTodo: { todos += newTodo, newTodo <- new Todo }
+//        addTodo: { todos += newTodo, newTodo <- new Todo }
     }
 
     // body starts here:
-    <div.todoComponent> {
+    <div .{todoComponent} /> {
+    /*
         todos.map[
             // ...
         ]
+     */
     }
 
 }

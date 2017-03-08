@@ -2,6 +2,7 @@ grammar com.dslconsultancy.uiscript.xtext.UIScript with org.eclipse.xtext.common
 
 import "http://www.dslconsultancy.com/uicript/core"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.dslconsultancy.com/uicript/components" as components
 import "http://www.dslconsultancy.com/uicript/expressions" as expr
 import "http://www.dslconsultancy.com/uicript/expressionsAux" as exprAux
 import "http://www.dslconsultancy.com/uicript/services" as services
@@ -25,11 +26,6 @@ UiModule returns structural::UiModule:
 			| (services+=Service)
 		)*
 	;
-	// TODO  consider adding "module globals" such as (immutable) parameters and error handling
-	/*
-	 * validation:
-	 * 	the first screen of a module should not take any parameters, or the GotoModuleStatement should have arguments
-	 */
 
 
 /*
@@ -162,7 +158,8 @@ SyntheticTypeLiteral returns types::SyntheticTypeLiteral:
  */
 
 Parametrisable returns Parametrisable:
-	MethodDefinition;	// | ComponentDefinition
+	MethodDefinition | ComponentDefinition
+	;
 
 Parameter returns Parameter:
 	name=ID ':' type=TypeLiteral
@@ -191,17 +188,81 @@ ArgumentList returns ArgumentList:
 
 
 /*
+ * +------------+
+ * | components |
+ * +------------+
+ */
+
+ComponentDefinition returns components::ComponentDefinition:
+	'component' name=ID parameterList=ParameterList '{'
+
+		(
+			'state' '{'
+				stateDeclarations+=ValueDeclaration*
+			'}'
+		)?
+
+		(
+			'actions' '{'
+			'}'
+		)?
+
+		contents=AbstractElement
+
+	'}'
+	;
+
+AbstractElement returns components::AbstractElement:
+	ComponentInvocation | HtmlElement
+	;
+
+ComponentInvocation returns components::ComponentInvocation:
+	'<'
+		(component=[components::ComponentDefinition])
+		(cssClassSpecification=CssClassSpecification)?
+		('#' idSpec=ID)?
+		(attributes+=AttributeWithOptionalKey)*
+	'/>' '{'
+	'}'
+	;
+
+AttributeWithOptionalKey returns Argument:
+	(parameter=[Parameter])? ':' valueExpr=Expression
+	;
+
+CssClassSpecification returns components::CssClassSpecification:
+	{components::CssClassSpecification}
+	'.' '{'
+		(
+			(atomicClassNames+=ID) | ('[' tags+=Expression ']')
+		)*
+	'}'
+	;
+
+HtmlElement returns components::HtmlElement:
+	'<'
+		(reactTag=ReactTag)
+		(cssClassSpecification=CssClassSpecification)?
+		('#' idSpec=ID)?
+		(attributes+=Attribute)*
+	'/>' '{'
+	'}'
+	;
+
+Attribute returns components::Attribute:
+	key=ID ':' value=Expression
+	;
+
+enum ReactTag returns components::ReactTag:
+	div | span
+	;
+
+
+/*
  * +--------+
  * | values |
  * +--------+
  */
-
-ValuesBlock returns ValuesBlock:
-	{ValuesBlock}
-	'values' '{'
-		declarations+=ValueDeclaration*
-	'}'
-	;
 
 Value returns Value:
 	name=ID
@@ -473,8 +534,7 @@ FeatureAccessExpression returns Expression hidden():
 
 // TODO  use an enum BuiltinMemberFunctions to add "member calls" to FeatureAccessExpression (and add a ton of validation)
 
-
-PrimaryExpression returns Expression hidden(WS, ML_COMMENT, SL_COMMENT):	// (undo cascade of FeatureAccessExpression's hidden())
+PrimaryExpression returns Expression hidden(WS, SL_COMMENT, ML_COMMENT):	// (undo cascade of FeatureAccessExpression's hidden())
 	  '(' Expression ')'
 	| LiteralExpression
 	| CallbackExpressions
