@@ -96,7 +96,7 @@ component TodoComponent(todos: Todo[]) {
 	}
 
 	// body starts here:
-	<div.todoComponent> {
+	<div .{todoComponent} /> {
 		todos.map[
 			// ...
 		]
@@ -122,7 +122,7 @@ The syntax is as follows: "`<`*tag-name*` .`*CSS-class-spec* `#`*ID-spec* *dicti
 
 Example:
 ```
-<TodoComponent .{myTodoApp ?active} todos: myTodos> {}
+<TodoComponent .{myTodoApp ?active} todos: myTodos /> {}
 ```
 
 The *tag name* is either the name of a HTML element (compliant with React), or the name of a defined component.
@@ -138,6 +138,8 @@ This feature serves to cater for "old skool" CSS.
 Whitespace between the tag name, the CSS class and ID specification is optional, and CSS class and ID specifications can be in any order.
 
 After that, a dictionary of named argument values follows.
+If the value of an argument "emits" a name matching an argument name (such as `todos`), then you can omit the argument's name.
+So, `:todos` acts as shorthand for `todos: todos`.
 
 The actual contents follow between `{}`.
 
@@ -193,11 +195,16 @@ Example:
 
 This renders a `DIV` element with CSS class(es) `"todo selected"` if `todo.selected` has value `true`, and `"todo"` otherwise.
 
+This operator can only be used inside CSS class specifications.
+
 
 ### The "dictionary" operator
 
 The "dictionary" operator has the following syntax: "*ID*`:` *value*" - i.e., an ID, following by a colon, followed by a value.
 This is useful for specifying arguments (which happen to be always named!) and building up dictionaries/maps (which map to JavaScript objects).
+
+If the value of an argument "emits" a name matching an argument name (such as `todos`), then you can omit the argument's name.
+So, `:todos` acts as shorthand for `todos: todos`.
 
 
 ## TODOs
@@ -208,9 +215,5 @@ Not yet specification for/(much) thought given to:
 * Maybe have some syntax to reference/validate against CSS Modules defined in `.css`/`.scss` files?
 	It seems to be rather easy to do this and provide plenty of value.
 * The exact nature of the services' declarations.
-* Consider making the tagging operator implicit: any expression in the CSS class spec that evaluates to `true`, results in a CSS class selector with the name of the last "fragment" in that expression.
-* Consider adding explicit componentn syntax for dependency injection that maps to `<Provider...>`.
-* Consider adding "shorthand syntax" for passing arguments, e.g.: `<TodoComponent todos> {}` for `<TodoComponent todos: todos> {}`.
-	The parameter name `todos` is then derived from the last segment of the expression `todos` which happens to be a reference to the state value `todos`.
-	Consider generalizing for such *name emitting expressions*.
+* Consider adding explicit component syntax for dependency injection that maps to `<Provider...>`.
 

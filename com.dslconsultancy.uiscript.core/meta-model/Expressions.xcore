@@ -151,7 +151,7 @@ class NumberLiteralExpression extends LiteralExpression {
 	BigDecimal value
 }
 
-// MethodCallExpression needed to be defined in UIDsl
+// MethodCallExpression is defined in ExpressionsAux
 
 class BooleanBinaryOperatorExpression extends BinaryOperatorExpression {}
 
