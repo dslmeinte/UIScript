@@ -49,4 +49,5 @@ class UIScriptParsingTest {
 		println(result.eResource.errors.map[toString])
 		Assert.assertTrue(result.eResource.errors.isEmpty)
 	}
+
 }

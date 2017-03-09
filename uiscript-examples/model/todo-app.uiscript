@@ -23,7 +23,7 @@ component TodoComponent(todos: [Todo] foo: String) {
     state {
         newTodo: Todo := new Todo()
 //        todosCompleted == todos.filter[completed].count
-        isNewTodoAddable == !newTodo.task.empty
+        isNewTodoAddable: Boolean == !newTodo.task.empty
     }
 
     actions {
@@ -31,7 +31,7 @@ component TodoComponent(todos: [Todo] foo: String) {
     }
 
     // body starts here:
-    <div .{todoComponent} /> {
+    <div .{todoComponent [isNewTodoAddable] foo: [!isNewTodoAddable]} /> {
     /*
         todos.map[
             // ...

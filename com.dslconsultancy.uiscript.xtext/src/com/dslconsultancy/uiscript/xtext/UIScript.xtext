@@ -233,11 +233,27 @@ AttributeWithOptionalKey returns Argument:
 CssClassSpecification returns components::CssClassSpecification:
 	{components::CssClassSpecification}
 	'.' '{'
-		(
-			(atomicClassNames+=ID) | ('[' tags+=Expression ']')
-		)*
+		(expressions+=CssClassExpression)*
 	'}'
 	;
+
+
+CssClassExpression returns components::CssClassExpression:
+	CssTaggingExpression
+	;
+
+CssTaggingExpression returns components::CssClassExpression:
+	CssArgument | ('[' {components::CssTaggingExpression} value=Expression ']')
+	;
+
+CssArgument returns components::CssClassExpression:
+	CssAtom (':' '[' {components::CssArgument.atom=current} value=Expression ']')?
+	;
+
+CssAtom returns components::CssAtom:
+	className=ID
+	;
+
 
 HtmlElement returns components::HtmlElement:
 	'<'

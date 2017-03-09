@@ -20,6 +20,27 @@ class ComponentDefinition extends Named, Parametrisable {
  */
 
 
+
+class CssClassSpecification {
+	contains CssClassExpression[] expressions
+}
+
+abstract class CssClassExpression {}
+
+class CssAtom extends CssClassExpression {
+	String className
+}
+
+class CssArgument extends CssClassExpression {
+	contains CssAtom atom
+	contains Expression value
+}
+
+class CssTaggingExpression extends CssClassExpression {
+	contains Expression value
+}
+
+
 abstract class AbstractElement extends Expression {
 	contains CssClassSpecification cssClassSpecification
 	String idSpec							// [0..1]
@@ -31,13 +52,6 @@ class ComponentInvocation extends AbstractElement {
 	refers ComponentDefinition component
 	contains Argument[] attributes
 }
-
-
-class CssClassSpecification {
-	String[] atomicClassNames
-	contains Expression[] tags
-}
-
 
 class HtmlElement extends AbstractElement {
 	ReactTag reactTag

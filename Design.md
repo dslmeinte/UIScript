@@ -122,14 +122,13 @@ The syntax is as follows: "`<`*tag-name*` .`*CSS-class-spec* `#`*ID-spec* *dicti
 
 Example:
 ```
-<TodoComponent .{myTodoApp ?active} todos: myTodos /> {}
+<TodoComponent .{myTodoApp [active]} todos: myTodos /> {}
 ```
 
 The *tag name* is either the name of a HTML element (compliant with React), or the name of a defined component.
 
-Following the tag name, there's an optional CSS class specification, which is either a name of a CSS class, or a group of "things".
-In turn, these things can be either names of CSS classes, or tagging or dictionary operators.
-The value part of dictionary operators must evaluate to a boolean.
+Following the tag name, there's an optional CSS class specification.
+**TODO**
 The name of a CSS class must be a valid identifier for JavaScript, so `my-class` is all out, I'm afraid.
 
 Following either the tag name or a CSS class specification, there's an ID specification, which must be a valid JavaScript identifier.
@@ -178,33 +177,6 @@ fooBarred -> <button .{warning explosive}> { "Proceed with caution?" }
 ```
 
 You could view the "when" operator as a ternary **if**-operator that's been made binary again.
-
-
-### The "tagging" operator
-
-The "tagging" operator takes a boolean-valued value reference (i.e., a value in the local state, a parameter, or a field of some structure) and turns it into the name of that value reference if the value evaluates to `true`, and to nothing if `false`.
-
-It is mostly helpful when computing CSS class names.
-Example:
-
-```
-<div .{todo ?newTodo.selected}> {
-	// ...
-}
-```
-
-This renders a `DIV` element with CSS class(es) `"todo selected"` if `todo.selected` has value `true`, and `"todo"` otherwise.
-
-This operator can only be used inside CSS class specifications.
-
-
-### The "dictionary" operator
-
-The "dictionary" operator has the following syntax: "*ID*`:` *value*" - i.e., an ID, following by a colon, followed by a value.
-This is useful for specifying arguments (which happen to be always named!) and building up dictionaries/maps (which map to JavaScript objects).
-
-If the value of an argument "emits" a name matching an argument name (such as `todos`), then you can omit the argument's name.
-So, `:todos` acts as shorthand for `todos: todos`.
 
 
 ## TODOs
